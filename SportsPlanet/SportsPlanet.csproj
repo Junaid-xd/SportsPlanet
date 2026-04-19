@@ -8,4 +8,51 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Assets\Images\Badminton Racket Yonex.jpg" />
+    <None Remove="Assets\Images\Basketball Spalding.jpeg" />
+    <None Remove="Assets\Images\bat.jpeg" />
+    <None Remove="Assets\Images\ca gold bat.jpeg" />
+    <None Remove="Assets\Images\ca-gold bat.jpeg" />
+    <None Remove="Assets\Images\Cricket Kit Full Set.jpg" />
+    <None Remove="Assets\Images\Hockey Stick.jpeg" />
+    <None Remove="Assets\Images\tennis ball pack 6.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Images\badminton-racket-yonex.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\basketball-spalding.jpeg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\cricket-bat.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\cricket-kit-full-set.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\football.webp">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\hockey-stick.jpeg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\ss-cricket-bat.jpeg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Images\tennis-ball-pack-6.jpeg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

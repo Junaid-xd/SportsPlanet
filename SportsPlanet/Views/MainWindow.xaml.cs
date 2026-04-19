@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SportsPlanet
+namespace SportsPlanet.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -19,6 +19,8 @@ namespace SportsPlanet
         public MainWindow()
         {
             InitializeComponent();
+            //MainFrame.Navigate(new LoginPage(MainFrame));
+            MainFrame.Navigate(new Dashboard(MainFrame));
         }
     }
 }
