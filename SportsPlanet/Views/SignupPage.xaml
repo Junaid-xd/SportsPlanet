@@ -50,7 +50,8 @@
                                  BorderBrush="#334155"
                                  Padding="8"
                                  Cursor="IBeam"
-                                 HorizontalAlignment="Stretch"/>
+                                 HorizontalAlignment="Stretch"
+                                 Name="T1"/>
 
                         <!-- Email -->
                         <TextBlock Text="Email"
@@ -63,19 +64,35 @@
                                  BorderBrush="#334155"
                                  Padding="8"
                                  Cursor="IBeam"
-                                 HorizontalAlignment="Stretch"/>
+                                 HorizontalAlignment="Stretch"
+                                 Name="T2"/>
 
                         <!-- Password -->
                         <TextBlock Text="Password"
                                    Foreground="{StaticResource MutedText}"
                                    Margin="0,15,0,5"/>
 
-                        <PasswordBox Height="35"
-                                     Background="{StaticResource CardBg}"
-                                     Foreground="{StaticResource PrimaryText}"
-                                     BorderBrush="#334155"
-                                     Padding="8"
-                                     HorizontalAlignment="Stretch"/>
+                        <TextBox Height="35"
+                                Background="{StaticResource CardBg}"
+                                Foreground="{StaticResource PrimaryText}"
+                                BorderBrush="#334155"
+                                Padding="8"
+                                Cursor="IBeam"
+                                HorizontalAlignment="Stretch"
+                                Name="T3"/>
+
+                        <TextBlock Text="Confirm Password"
+                                   Foreground="{StaticResource MutedText}"
+                                   Margin="0,15,0,5"/>
+
+                        <TextBox Height="35"
+                                Background="{StaticResource CardBg}"
+                                Foreground="{StaticResource PrimaryText}"
+                                BorderBrush="#334155"
+                                Padding="8"
+                                Cursor="IBeam"
+                                HorizontalAlignment="Stretch"
+                                Name="T4"/>
 
                         <!-- Signup Button -->
                         <Button Content="Create Account"
@@ -86,16 +103,36 @@
                                 BorderThickness="0"
                                 FontWeight="SemiBold"
                                 Cursor="Hand"
-                                HorizontalAlignment="Stretch"/>
+                                HorizontalAlignment="Stretch"
+                                Click="SignupButtonClick"/>
 
                         <!-- Footer -->
-                        <TextBlock Text="Already have an account? Login"
-                                   Foreground="{StaticResource PrimaryBlue}"
-                                   FontSize="12"
-                                   HorizontalAlignment="Center"
-                                   Margin="0,15,0,0"
-                                   Cursor="Hand"
-                                   MouseLeftButtonUp="goToLoginPage"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock 
+                                Grid.Column="0"
+                                Text="Already have an account?"
+                                Foreground="{StaticResource PrimaryBlue}"
+                                FontSize="12"
+                                HorizontalAlignment="Center"
+                                Margin="0,15,0,0"
+                                Cursor="Hand"
+                                MouseLeftButtonUp="GoToLoginPage"/>
+
+                            <TextBlock 
+                                Grid.Column="1"
+                                Text="Browse Products"
+                                Foreground="{StaticResource PrimaryBlue}"
+                                FontSize="12"
+                                HorizontalAlignment="Center"
+                                Margin="0,15,0,0"
+                                Cursor="Hand"
+                                MouseLeftButtonUp="GoToDashboard"/>
+                        </Grid>
 
                     </StackPanel>
 

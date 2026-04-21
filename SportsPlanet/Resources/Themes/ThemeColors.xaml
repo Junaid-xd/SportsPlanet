@@ -25,6 +25,16 @@
     <SolidColorBrush x:Key="Danger" Color="#EF4444"/>
     <SolidColorBrush x:Key="Warning" Color="#FACC15"/>
 
+    <!-- ================= CART THEME ================= -->
+
+    <SolidColorBrush x:Key="CartPanelBg" Color="#0B1220"/>
+    <SolidColorBrush x:Key="CartItemBg" Color="#1E293B"/>
+    <SolidColorBrush x:Key="CartSummaryBg" Color="#111827"/>
+
+    <!-- Optional accent improvements -->
+    <SolidColorBrush x:Key="AccentGreen" Color="#22C55E"/>
+    <SolidColorBrush x:Key="AccentRed" Color="#EF4444"/>
+
     <!-- ================= MENU BUTTON STYLE ================= -->
     <Style x:Key="MenuButtonStyle" TargetType="Button">
 

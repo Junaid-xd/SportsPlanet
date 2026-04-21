@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportsPlanet.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,23 +22,44 @@ namespace SportsPlanet.Views
     public partial class LoginPage : Page
     {
         private Frame frame;
+        private AuthService authService;
 
         public LoginPage(Frame fra)
         {
             InitializeComponent();
             frame = fra;
+            authService = new AuthService();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void LoginClick(object sender, RoutedEventArgs e)
         {
-            // after login success
-
-            frame.Navigate(new Dashboard(frame));
+            if(T1.Text == "" || T2.Text == "")
+            {
+                MessageBox.Show("Please fill all fields");
+                return;
+            }
+            else
+            {
+                
+                if(authService.login(T1.Text, T2.Text))
+                {
+                    frame.Navigate(new Dashboard(frame));
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect credentials");
+                }
+            }
         }
 
         private void goToSignupPage(Object sender, MouseButtonEventArgs e)
         {
             frame.Navigate(new SignupPage(frame));
+        }
+
+        public void goToDashboardPage(Object sender, MouseButtonEventArgs e) 
+        {
+            frame.Navigate(new Dashboard(frame));
         }
     }
 }

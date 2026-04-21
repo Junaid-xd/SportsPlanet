@@ -43,6 +43,64 @@ namespace SportsPlanet.Services
             return products;
         }
 
+        public bool AddNewUser(User user)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"
+                    INSERT INTO users (name, email, password, role, created_at)
+                    VALUES (@Name, @Email, @Password, @Role, @CreatedAt);
+                ";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", user.Name);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+                    cmd.Parameters.AddWithValue("@Role", user.Role);
+                    cmd.Parameters.AddWithValue("@CreatedAt", user.CreatedAt);
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    return rowsAffected > 0? true:false; 
+                }
+
+            }
+        }
+
+        public User? FindByEmail(string email)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "SELECT * FROM users WHERE email = @Email";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new User
+                            {
+                                Id = (int)reader["id"],
+                                Name = reader["name"].ToString(),
+                                Email = reader["email"].ToString(),
+                                Password = reader["password"].ToString(),
+                                Role = reader["role"].ToString(),
+                                CreatedAt = (long)reader["created_at"]
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null; // user not found
+        }
 
     }
 }

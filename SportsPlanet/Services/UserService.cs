@@ -1,12 +1,14 @@
-﻿using System;
+﻿using SportsPlanet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SportsPlanet.ViewModels
+namespace SportsPlanet.Services
 {
-    internal class MainWindow
+    public class UserService
     {
+        
     }
 }
