@@ -34,7 +34,7 @@ namespace SportsPlanet.Services
 
         public static void RemoveFromCart(Product product)
         {
-            var item = cartItems.FirstOrDefault(x => x.Product.Id == product.Id);
+            var item = cartItems.FirstOrDefault(p => p.Product.Id == product.Id);
 
             if (item != null)
             {

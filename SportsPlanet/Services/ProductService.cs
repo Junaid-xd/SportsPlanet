@@ -9,8 +9,13 @@ namespace SportsPlanet.Services
 {
     public class ProductService
     {
-        private DbService dbService = new DbService();
+        private readonly DbService dbService;
 
+        public ProductService()
+        {
+            var context = new EadMidsContext();  
+            dbService = new DbService(context);   
+        }
         public List<Product> GetAllProducts()
         {
             return dbService.GetAllProducts();

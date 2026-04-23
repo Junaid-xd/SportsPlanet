@@ -20,14 +20,16 @@ namespace SportsPlanet.Views
         {
             InitializeComponent();
             frame = fra;
+            HeaderControl.SetFrame(frame);
+
             productService = new ProductService();
             authService = new AuthService();
 
-            // Bind products directly to ListView (or ItemsControl) in XAML
             LoadProducts();
             ProductsItemsControl.ItemsSource = Products;
 
             CartItemsControl.ItemsSource = CartService.CartItems;
+            CheckoutItemsControl.ItemsSource = CartService.CartItems;
         }
 
         private void LoadProducts()
@@ -38,41 +40,28 @@ namespace SportsPlanet.Views
                 Products.Add(p);
         }
 
-        public void LoginClick(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(new LoginPage(frame));
-        }
-
-        public void SignupClick(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(new SignupPage(frame));
-        }
-
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
-            UpdateAuthUI();
-        }
+            //UpdateAuthUI();
 
-        private void LogoutClick(object sender, RoutedEventArgs e)
-        {
-            AuthService.logout();
-            frame.Navigate(new LoginPage(frame));
-        }
+            CartItemsControl.ItemsSource = null;
+            CartItemsControl.ItemsSource = CartService.CartItems;
 
-        private void UpdateAuthUI()
-        {
-            if (AuthService.isLoggedIn)
+            CheckoutItemsControl.ItemsSource = null;
+            CheckoutItemsControl.ItemsSource = CartService.CartItems;
+
+            // restore cart visibility
+            if (CartService.CartItems.Count > 0)
             {
-                loginBtn.Visibility = Visibility.Collapsed;
-                signupBtn.Visibility = Visibility.Collapsed;
-                logoutBtn.Visibility = Visibility.Visible;
+                CartColumn.Width = new GridLength(0.4, GridUnitType.Star);
             }
             else
             {
-                loginBtn.Visibility = Visibility.Visible;
-                signupBtn.Visibility = Visibility.Visible;
-                logoutBtn.Visibility = Visibility.Collapsed;
+                CartColumn.Width = new GridLength(0);
             }
+
+            // restore total
+            UpdateCartTotal();
         }
 
         private void AddToCartClick(object sender, RoutedEventArgs e)
@@ -152,5 +141,70 @@ namespace SportsPlanet.Views
                 CartColumn.Width = new GridLength(0);
             }
         }
+
+        private void HandleCheckout(object sender, RoutedEventArgs e)
+        {
+            if (CartService.CartItems.Count == 0)
+            {
+                MessageBox.Show("Cart is empty!");
+                return;
+            }
+
+            CheckoutOverlay.Visibility = Visibility.Visible;
+        }
+
+        private void CloseCheckout(object sender, RoutedEventArgs e)
+        {
+            CheckoutOverlay.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void ConfirmOrderClick(object sender, RoutedEventArgs e)
+        {
+            // 1. Check login
+            if (!AuthService.isLoggedIn)
+            {
+                frame.Navigate(new LoginPage(frame));
+                return;
+            }
+
+            // 2. Check cart
+            if (CartService.CartItems.Count == 0)
+            {
+                MessageBox.Show("Cart is empty!");
+                return;
+            }
+
+            // 3. Call OrderService
+            var orderService = new OrderService();
+
+            bool success = orderService.PlaceOrder(
+                AuthService.loggedInUser.Id,
+                CartService.CartItems.ToList(),
+                "Home Delivery",     // later: from UI input
+                "Cash",              // later: from UI input
+                "User Address Here"  // later: from textbox
+            );
+
+            // 4. Handle result
+            if (success)
+            {
+                // Clear cart
+                CartService.CartItems.Clear();
+
+                // Update UI
+                UpdateCartTotal();
+                CartColumn.Width = new GridLength(0);
+                CheckoutOverlay.Visibility = Visibility.Collapsed;
+
+                MessageBox.Show("Order placed successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Failed to place order!");
+            }
+        }
+
+      
     }
 }

@@ -10,9 +10,15 @@ namespace SportsPlanet.Services
 {
     internal class AuthService
     {
-        private DbService dbService = new DbService();
+        private readonly DbService dbService;
         public static bool isLoggedIn = false;
         public static User ?loggedInUser = null;
+
+        public AuthService()
+        {
+            var context = new EadMidsContext();   
+            dbService = new DbService(context);  
+        }
 
         public bool AddUser(User user)
         {

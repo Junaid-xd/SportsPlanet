@@ -1,0 +1,139 @@
+﻿<Page x:Class="SportsPlanet.Views.OrdersView"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+   xmlns:local="clr-namespace:SportsPlanet.Views"
+   mc:Ignorable="d" 
+   Title="OrdersView">
+
+
+    <Grid Background="{StaticResource PrimaryBg}">
+
+
+        <!-- ================= HEADER ================= -->
+        <Border Background="{StaticResource CardBg}" Padding="15">
+            <DockPanel>
+
+                <TextBlock Text="My Orders"
+                       Foreground="{StaticResource PrimaryText}"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       DockPanel.Dock="Left"/>
+
+            </DockPanel>
+        </Border>
+
+        <!-- ================= CONTENT ================= -->
+        <ScrollViewer Margin="0,60,0,0">
+
+            <ItemsControl Name="OrdersItemsControl">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <!-- ORDER CARD -->
+                        <Border Background="{StaticResource CardBg}"
+                            CornerRadius="10"
+                            Padding="15"
+                            Margin="15">
+
+                            <StackPanel>
+
+                                <!-- ORDER HEADER -->
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel>
+
+                                        <TextBlock Text="{Binding Id, StringFormat=Order #{0}}"
+                                               Foreground="{StaticResource PrimaryText}"
+                                               FontWeight="Bold"
+                                               FontSize="14"/>
+
+                                        <TextBlock Text="{Binding CreatedAt}"
+                                               Foreground="{StaticResource SecondaryText}"
+                                               FontSize="12"/>
+
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+
+                                        <TextBlock Text="{Binding Status}"
+                                               Foreground="{StaticResource Success}"
+                                               FontWeight="Bold"/>
+
+                                        <TextBlock Text="{Binding TotalAmount, StringFormat=Rs. {0}}"
+                                               Foreground="{StaticResource PrimaryText}"
+                                               FontWeight="Bold"/>
+
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- ADDRESS -->
+                                <TextBlock Text="{Binding Address}"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       Margin="0,0,0,10"/>
+
+                                <!-- ITEMS -->
+                                <ItemsControl ItemsSource="{Binding OrderItems}">
+
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+
+                                            <Border Background="{StaticResource CartItemBg}"
+                                                CornerRadius="8"
+                                                Padding="10"
+                                                Margin="0,0,0,8">
+
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <!-- PRODUCT INFO -->
+                                                    <StackPanel>
+
+                                                        <TextBlock Text="{Binding Product.ProductName}"
+                                                               Foreground="{StaticResource PrimaryText}"
+                                                               FontWeight="SemiBold"/>
+
+                                                        <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}"
+                                                               Foreground="{StaticResource SecondaryText}"
+                                                               FontSize="12"/>
+
+                                                    </StackPanel>
+
+                                                    <!-- QTY -->
+                                                    <TextBlock Grid.Column="1"
+                                                           Text="{Binding Quantity, StringFormat=Qty: {0}}"
+                                                           Foreground="{StaticResource SecondaryText}"
+                                                           VerticalAlignment="Center"/>
+
+                                                </Grid>
+
+                                            </Border>
+
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+
+                                </ItemsControl>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+
+        </ScrollViewer>
+
+    </Grid>
+</Page>
+
