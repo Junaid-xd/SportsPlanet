@@ -20,5 +20,10 @@ namespace SportsPlanet.Services
         {
             return dbService.GetAllProducts();
         }
+
+        public List<Product> GetProductsByTag(String tag)
+        {
+            return dbService.GetProductsByTag(tag);
+        }
     }
 }

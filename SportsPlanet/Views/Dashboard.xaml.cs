@@ -21,6 +21,8 @@ namespace SportsPlanet.Views
             InitializeComponent();
             frame = fra;
             HeaderControl.SetFrame(frame);
+            HeaderControl.SetActive("All Products");
+            HeaderControl.OnFilterSelected += FilterProducts;
 
             productService = new ProductService();
             authService = new AuthService();
@@ -205,6 +207,13 @@ namespace SportsPlanet.Views
             }
         }
 
-      
+
+        private void FilterProducts(string tag)
+        {
+            var list = productService.GetProductsByTag(tag);
+            Products.Clear();
+            foreach (var p in list)
+                Products.Add(p);
+        }
     }
 }

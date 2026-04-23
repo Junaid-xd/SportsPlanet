@@ -9,6 +9,11 @@
     <Color x:Key="SurfaceAltColor">#111827</Color>
     <Color x:Key="HoverColor">#273449</Color>
 
+    <!-- ================= HEADER ACTIVE STATE ================= -->
+
+    <Color x:Key="ActiveButtonBgColor">#1D4ED8</Color>
+    <Color x:Key="ActiveButtonTextColor">#FFFFFF</Color>
+
     <!-- ================= BRUSHES ================= -->
 
     <SolidColorBrush x:Key="PrimaryBg" Color="{StaticResource PrimaryBgColor}"/>
@@ -17,13 +22,32 @@
     <SolidColorBrush x:Key="CartItemBg" Color="{StaticResource SurfaceColor}"/>
     <SolidColorBrush x:Key="CartSummaryBg" Color="{StaticResource SurfaceAltColor}"/>
     <SolidColorBrush x:Key="HoverBg" Color="{StaticResource HoverColor}"/>
+    <SolidColorBrush x:Key="ActiveButtonBg" Color="{StaticResource ActiveButtonBgColor}"/>
+    <SolidColorBrush x:Key="ActiveButtonText" Color="{StaticResource ActiveButtonTextColor}"/>
+    
+    
+    <!-- ================= HOVER FOR HEADER BUTTONS ================= -->
+    <Color x:Key="ActiveButtonHoverColor">#2563EB</Color>
+
+
+    <!-- ================= ORDER STATUS COLORS ================= -->
+
+    <SolidColorBrush x:Key="StatusPending" Color="#F59E0B"/>
+    <SolidColorBrush x:Key="StatusProcessing" Color="#3B82F6"/>
+    <SolidColorBrush x:Key="StatusCompleted" Color="#22C55E"/>
+    <SolidColorBrush x:Key="StatusCancelled" Color="#EF4444"/>
+
+    <!-- ================= ORDER UI ================= -->
+
+    <SolidColorBrush x:Key="OrderCardBorder" Color="#334155"/>
+    <SolidColorBrush x:Key="OrderHeaderBg" Color="#111C2E"/>
+    <SolidColorBrush x:Key="OrderItemBgAlt" Color="#0B1220"/>
 
     <!-- ================= TEXT ================= -->
 
     <SolidColorBrush x:Key="PrimaryText" Color="#E5E7EB"/>
     <SolidColorBrush x:Key="SecondaryText" Color="#94A3B8"/>
     <SolidColorBrush x:Key="MutedText" Color="#CBD5E1"/>
-    <!-- ✅ FIXED -->
     <SolidColorBrush x:Key="OnPrimaryText" Color="White"/>
 
     <!-- ================= INPUT ================= -->

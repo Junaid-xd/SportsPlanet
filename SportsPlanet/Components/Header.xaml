@@ -1,11 +1,13 @@
 ﻿
     
-    <UserControl x:Class="SportsPlanet.Components.Header"
+    <!--<UserControl x:Class="SportsPlanet.Components.Header"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="60"
+             VerticalAlignment="Top">
 
-    <Border Background="{StaticResource CardBg}" Padding="15">
-        <DockPanel>
+    <Border Background="{StaticResource CardBg}" Padding="10" VerticalAlignment="Stretch">
+        <DockPanel LastChildFill="False">
 
             <TextBlock Text="Sports Planet"
                        Foreground="{StaticResource PrimaryText}"
@@ -16,33 +18,121 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right">
 
-                <Button Content="New Arrivals" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Bats" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Balls" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Badminton" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Kits" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Name="AllProductsBtn" Content="All Products" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="NewArrivalBtn" Content="New Arrivals" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="BatsBtn" Content="Bats" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="BallsBtn" Content="Balls" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="BadmintonBtn" Content="Badminton" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="KitsBtn" Content="Kits" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
 
-                <Button Content="Orders"
+                <Button Name="OrdersBtn"
+                        Content="Orders"
                         Click="GoToOrdersPage"
-                        Style="{StaticResource MenuButtonStyle}"/>
-
-                <Button Content="Cart" Style="{StaticResource MenuButtonStyle}"/>
-
-                <Button Content="Login" Name="loginBtn" Click="LoginClick"/>
-                <Button Content="Signup" Name="signupBtn" Click="SignupClick"/>
-                <Button Content="Logout" Name="logoutBtn" Click="LogoutClick"/>
-
-                <Button Content="Stats"
                         Style="{StaticResource MenuButtonStyle}"
                         Visibility="Collapsed"/>
 
-                <Button Content="Manage Products"
-                        Style="{StaticResource MenuButtonStyle}"
-                        Visibility="Collapsed"/>
+                <Button Name="ManageProductsBtn" Content="Manage Products"  Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="ReportsBtn" Content="Reports" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="DispatchOrdersBtn" Content="Dispatch Orders"  Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="CreateNewAdminAndSuperAdminBtn" Content="Create New Admin"  Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+
+
+                <Button Content="Login" Name="loginBtn" Click="LoginClick" Visibility="Collapsed"/>
+                <Button Content="Signup" Name="signupBtn" Click="SignupClick" Visibility="Collapsed"/>
+                <Button Content="Logout" Name="logoutBtn" Click="LogoutClick" Visibility="Collapsed"/>
+
+               
 
             </StackPanel>
 
         </DockPanel>
     </Border>
 
+</UserControl>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<UserControl x:Class="SportsPlanet.Components.Header"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="60">
+
+    <Border Background="{StaticResource CardBg}" Padding="10">
+
+        <Grid>
+
+            <!-- 3 COLUMN LAYOUT -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ================= LEFT: BRAND ================= -->
+            <TextBlock Text="Sports Planet"
+                       Foreground="{StaticResource PrimaryText}"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"/>
+
+            <!-- ================= CENTER: NAVIGATION ================= -->
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <Button Name="AllProductsBtn" Content="All Products" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed" Click="HandleAllProductsClick"/>
+                <Button Name="NewArrivalBtn" Content="New Arrivals" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed" Click="HandleNewArrivalClick"/>
+                <Button Name="BatsBtn" Click="HandleBatsClick" Content="Bats" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="BallsBtn" Click="HandleBallClick" Content="Balls" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="BadmintonBtn" Click="HandleBadmintonClick" Content="Badminton" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="KitsBtn" Click="HandleKitsClick" Content="Kits" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+
+                <Button Name="OrdersBtn"
+                        Content="Orders"
+                        Click="GoToOrdersPage"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Visibility="Collapsed"/>
+
+                <Button Name="ManageProductsBtn" Content="Manage Products" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="ReportsBtn" Content="Reports" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="DispatchOrdersBtn" Content="Dispatch Orders" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Name="CreateNewAdminAndSuperAdminBtn" Content="Create New Admin" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+
+            </StackPanel>
+
+            <!-- ================= RIGHT: AUTH ================= -->
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+
+                <Button Content="Login" Name="loginBtn" Click="LoginClick" Visibility="Collapsed"/>
+                <Button Content="Signup" Name="signupBtn" Click="SignupClick" Visibility="Collapsed"/>
+                <Button Content="Logout" Name="logoutBtn" Click="LogoutClick" Visibility="Collapsed"/>
+
+            </StackPanel>
+
+        </Grid>
+
+    </Border>
 </UserControl>

@@ -72,5 +72,19 @@ namespace SportsPlanet.Services
                 .OrderByDescending(o => o.Id)
                 .ToList();
         }
+
+        public List<Product> GetProductsByTag(string tag)
+        {
+            if (string.IsNullOrWhiteSpace(tag))
+                return new List<Product>();
+
+            tag = tag.Trim().ToLower();
+
+            return dbcontext.Products
+                .Where(p => p.Tags != null &&
+                    ("," + p.Tags.ToLower().Replace(" ", "") + ",")
+                    .Contains("," + tag + ","))
+                .ToList();
+        }
     }
 }

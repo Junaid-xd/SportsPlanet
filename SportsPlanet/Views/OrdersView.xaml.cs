@@ -28,7 +28,8 @@ namespace SportsPlanet.Views
         {
             InitializeComponent();
             frame = fra;
-
+            HeaderControl.SetFrame(frame);
+            HeaderControl.SetActive("Orders");
             orderService = new OrderService();
 
             Loaded += PageLoaded; // same pattern as Dashboard
