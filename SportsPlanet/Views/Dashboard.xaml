@@ -49,7 +49,9 @@
                                         Margin="10"
                                         Padding="10"
                                         Background="{StaticResource CardBg}"
-                                        CornerRadius="10">
+                                        BorderBrush="#99FFFFFF"
+                                        BorderThickness="1"
+                                        CornerRadius="5">
 
                                     <StackPanel>
                                         <Image Height="120"
@@ -64,16 +66,46 @@
                                         <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}"
                                                    Foreground="{StaticResource SecondaryText}"/>
 
-                                        <TextBlock Text="{Binding Availability}"
-                                                   Foreground="{StaticResource Success}"/>
+                                        <TextBlock>
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Text" Value="In Stock"/>
+                                                    <Setter Property="Foreground" Value="LightGreen"/>
 
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Quantity}" Value="0">
+                                                            <Setter Property="Text" Value="Out of Stock"/>
+                                                            <Setter Property="Foreground" Value="Red"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                        
                                         <Button Content="Add to Cart"
                                                 Margin="0,10,0,0"
                                                 Background="{StaticResource PrimaryBlue}"
                                                 Foreground="{StaticResource OnPrimaryText}"
                                                 BorderThickness="0"
                                                 Tag="{Binding}"
-                                                Click="AddToCartClick"/>
+                                                Click="AddToCartClick">
+
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <!-- Default: visible -->
+                                                    <Setter Property="Visibility" Value="Visible"/>
+
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Quantity}" Value="0">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+
+
+                                        </Button>
+                                        
                                     </StackPanel>
 
                                 </Border>
@@ -134,7 +166,7 @@
                                                                Foreground="{StaticResource PrimaryText}"
                                                                Width="300"/>
 
-                                                    
+
 
                                                     <TextBlock Text="{Binding Product.Price, StringFormat=Rs. {0}}"
                                                                Foreground="{StaticResource SecondaryText}"/>
@@ -246,105 +278,177 @@
                     </Grid>
 
                 </Border>
-
+                
             </Grid>
 
         </Grid>
 
         <!-- ================= OVERLAY ================= -->
+
         <Grid x:Name="CheckoutOverlay"
               Background="{StaticResource OverlayBg}"
               Visibility="Collapsed"
               Panel.ZIndex="999">
 
-            <Grid HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Width="500">
+             <!--Center Card--> 
+            <Border Width="650"
+                    MaxWidth="700"
+                    BorderBrush="#FFFFFF"
+                    BorderThickness="2"
+                    Padding="25"
+                    Background="{StaticResource CardBg}"
+                    CornerRadius="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
 
-                <Border Background="{StaticResource CardBg}"
-                        Padding="20"
-                        CornerRadius="10">
+                <StackPanel>
 
-                    <ScrollViewer>
+                     <!--Title--> 
+                    <TextBlock Text="Checkout"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource PrimaryText}"
+                       HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Review your order and complete purchase"
+                       Foreground="{StaticResource SecondaryText}"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       Margin="0,5,0,20"/>
+
+                     <!--Cart Items--> 
+                    <Border Background="{StaticResource PrimaryBg}"
+                    Padding="10"
+                    CornerRadius="8">
 
                         <StackPanel>
 
-                            <TextBlock Text="Checkout"
-                                       FontSize="20"
-                                       FontWeight="Bold"
-                                       Foreground="{StaticResource PrimaryText}"
-                                       Margin="0,0,0,15"/>
+                             
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
 
-                            <ItemsControl Name="CheckoutItemsControl">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                                            <TextBlock Text="{Binding Product.ProductName}" Width="200"
-                                                       Foreground="{StaticResource PrimaryText}"/>
-                                            <TextBlock Text="{Binding Quantity}" Width="50"
-                                                       Foreground="{StaticResource SecondaryText}"/>
-                                            <TextBlock Text="{Binding Product.Price, StringFormat=Rs. {0}}"
-                                                       Foreground="{StaticResource SecondaryText}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                                <TextBlock Text="Product"
+                                   Foreground="{StaticResource MutedText}"/>
+                                <TextBlock Text="Qty"
+                                   Grid.Column="1"
+                                   Foreground="{StaticResource MutedText}"/>
+                                <TextBlock Text="Price"
+                                   Grid.Column="2"
+                                   Foreground="{StaticResource MutedText}"/>
+                            </Grid>
 
-                            <TextBlock Text="Shipping Address"
-                                       Foreground="{StaticResource SecondaryText}"
-                                       Margin="0,15,0,5"/>
+                            <ScrollViewer MaxHeight="180"
+                                          VerticalScrollBarVisibility="Auto">
 
-                            <TextBox Name="AddressBox"
-                                     Height="60"
-                                     Background="{StaticResource InputBg}"
-                                     Foreground="{StaticResource InputText}"/>
+                                <ItemsControl Name="CheckoutItemsControl">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Delivery Type"
-                                       Foreground="{StaticResource SecondaryText}"
-                                       Margin="0,15,0,5"/>
+                                                <TextBlock Text="{Binding Product.ProductName}"
+                                                           Foreground="{StaticResource PrimaryText}"/>
 
-                            <ComboBox Name="DeliveryTypeBox"
-                                      Background="{StaticResource InputBg}"
-                                      Foreground="{StaticResource InputText}"
-                                      SelectedIndex="0">
-                                <ComboBoxItem Content="Standard"/>
-                                <ComboBoxItem Content="Express"/>
-                            </ComboBox>
+                                                <TextBlock Text="{Binding Quantity}"
+                                           Grid.Column="1"
+                                           Foreground="{StaticResource SecondaryText}"/>
 
-                            <TextBlock Text="Payment Method"
-                                       Foreground="{StaticResource SecondaryText}"
-                                       Margin="0,15,0,5"/>
+                                                <TextBlock Text="{Binding Product.Price, StringFormat=Rs. {0}}"
+                                           Grid.Column="2"
+                                           Foreground="{StaticResource SecondaryText}"/>        
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
 
-                            <ComboBox Name="PaymentBox"
-                                      Background="{StaticResource InputBg}"
-                                      Foreground="{StaticResource InputText}"
-                                      SelectedIndex="0">
-                                <ComboBoxItem Content="Cash on Delivery"/>
-                                <ComboBoxItem Content="Card"/>
-                            </ComboBox>
-
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Right"
-                                        Margin="0,20,0,0">
-
-                                <Button Content="Cancel"
-                                        Margin="0,0,10,0"
-                                        Click="CloseCheckout"/>
-
-                                <Button Content="Confirm Order"
-                                        Background="{StaticResource PrimaryBlue}"
-                                        Foreground="{StaticResource OnPrimaryText}"
-                                        Click="ConfirmOrderClick"/>
-                            </StackPanel>
+                            </ScrollViewer>
 
                         </StackPanel>
+                    </Border>
 
-                    </ScrollViewer>
+                     <!--Address--> 
+                    <TextBlock Text="Shipping Address"
+                       Foreground="{StaticResource MutedText}"
+                       Margin="0,15,0,5"/>
 
-                </Border>
+                    <TextBox Name="AddressBox"
+                     Height="40"
+                     Padding="8"
+                     Background="{StaticResource PrimaryBg}"
+                     Foreground="{StaticResource PrimaryText}"
+                     BorderBrush="#334155"
+                     BorderThickness="1"/>
 
-            </Grid>
+                     <!--Delivery--> 
+                    <TextBlock Text="Delivery Type"
+                       Foreground="{StaticResource MutedText}"
+                       Margin="0,15,0,5"/>
 
+                    <ComboBox Name="DeliveryTypeBox"
+                              Height="35"
+                              Foreground="Black"
+                              BorderBrush="#334155"
+                              BorderThickness="1"
+                              Padding="5"
+                              SelectedIndex="0">
+
+                        <ComboBoxItem Content="Standard"/>
+                        <ComboBoxItem Content="Express"/>
+                    </ComboBox>
+
+                     <!--Payment--> 
+                    <TextBlock Text="Payment Method"
+                       Foreground="{StaticResource MutedText}"
+                       Margin="0,15,0,5"/>
+
+                    <ComboBox Name="PaymentBox"
+                              Height="35"
+                              Foreground="Black"
+                              BorderBrush="#334155"
+                              BorderThickness="1"
+                              Padding="5"
+                              SelectedIndex="0">
+
+                        
+                        <ComboBoxItem Content="COD (Cash on Delivery)"/>
+                    </ComboBox>
+
+
+
+                     <!--Buttons--> 
+                    <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,20,0,0">
+
+                        <Button Content="Cancel"
+                        Width="90"
+                        Height="35"
+                        Margin="0,0,10,0"
+                        Background="Transparent"
+                        Foreground="{StaticResource SecondaryText}"
+                        BorderBrush="#334155"
+                        Click="CloseCheckout"/>
+
+                        <Button Content="Confirm"
+                        Width="110"
+                        Height="35"
+                        Background="{StaticResource PrimaryBlue}"
+                        Foreground="{StaticResource OnPrimaryText}"
+                        BorderThickness="0"
+                        FontWeight="SemiBold"
+                        Click="ConfirmOrderClick"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
         </Grid>
 
     </Grid>

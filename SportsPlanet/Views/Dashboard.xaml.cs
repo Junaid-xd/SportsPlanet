@@ -28,7 +28,6 @@ namespace SportsPlanet.Views
             authService = new AuthService();
 
             LoadProducts();
-            ProductsItemsControl.ItemsSource = Products;
 
             CartItemsControl.ItemsSource = CartService.CartItems;
             CheckoutItemsControl.ItemsSource = CartService.CartItems;
@@ -37,9 +36,13 @@ namespace SportsPlanet.Views
         private void LoadProducts()
         {
             var list = productService.GetAllProducts();
+
+            ProductsItemsControl.ItemsSource = null;
+
             Products.Clear();
             foreach (var p in list)
                 Products.Add(p);
+            ProductsItemsControl.ItemsSource = Products;
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -160,7 +163,10 @@ namespace SportsPlanet.Views
             CheckoutOverlay.Visibility = Visibility.Collapsed;
         }
 
-
+        private void refreshPage()
+        {
+            frame.Navigate(new Dashboard(frame));
+        }
         private void ConfirmOrderClick(object sender, RoutedEventArgs e)
         {
             // 1. Check login
@@ -177,37 +183,72 @@ namespace SportsPlanet.Views
                 return;
             }
 
-            // 3. Call OrderService
-            var orderService = new OrderService();
-
-            bool success = orderService.PlaceOrder(
-                AuthService.loggedInUser.Id,
-                CartService.CartItems.ToList(),
-                "Home Delivery",     // later: from UI input
-                "Cash",              // later: from UI input
-                "User Address Here"  // later: from textbox
-            );
-
-            // 4. Handle result
-            if (success)
+            if (QuantityValidation())
             {
-                // Clear cart
-                CartService.CartItems.Clear();
+                // 3. Call OrderService
+                var orderService = new OrderService();
 
-                // Update UI
-                UpdateCartTotal();
-                CartColumn.Width = new GridLength(0);
-                CheckoutOverlay.Visibility = Visibility.Collapsed;
+                bool success = orderService.PlaceOrder(
+                    AuthService.loggedInUser.Id,
+                    CartService.CartItems.ToList(),
+                    AddressBox.Text,
+                    DeliveryTypeBox.Text,
+                    PaymentBox.Text
+                );
 
-                MessageBox.Show("Order placed successfully!");
+                // 4. Handle result
+                if (success)
+                {
+                    // Clear cart
+                    CartService.CartItems.Clear();
+
+                    // Update UI
+                    UpdateCartTotal();
+                    CartColumn.Width = new GridLength(0);
+                    CheckoutOverlay.Visibility = Visibility.Collapsed;
+
+                    refreshPage();
+                    MessageBox.Show("Order placed successfully!");
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Failed to place order!");
+                }
             }
             else
             {
-                MessageBox.Show("Failed to place order!");
+                CheckoutOverlay.Visibility = Visibility.Collapsed;
             }
         }
 
+        private bool QuantityValidation()
+        {
+            foreach (var item in CartService.CartItems)
+            {
+                var product = productService.GetProductById(item.Product.Id);
 
+                if (product == null)
+                {
+                    MessageBox.Show("Product not found.");
+                    return false;
+                }
+
+                if (item.Quantity > product.Quantity)
+                {
+                    MessageBox.Show(
+                        $"{product.ProductName} only has {product.Quantity} items available.",
+                        "Stock Error",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                    return false;
+                }
+            }
+
+            return true;
+        }
         private void FilterProducts(string tag)
         {
             var list = productService.GetProductsByTag(tag);

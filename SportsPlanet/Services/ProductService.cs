@@ -1,4 +1,5 @@
-﻿using SportsPlanet.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SportsPlanet.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace SportsPlanet.Services
         public List<Product> GetProductsByTag(String tag)
         {
             return dbService.GetProductsByTag(tag);
+        }
+
+        public Product? GetProductById(int id)
+        {
+            return dbService.GetProductById(id);
         }
     }
 }

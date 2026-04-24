@@ -33,6 +33,37 @@ namespace SportsPlanet.Services
                            .FirstOrDefault(u => u.Email == email);
         }
 
+        //public bool PlaceOrder(Order order, List<CartItem> cartItems)
+        //{
+        //    using var transaction = dbcontext.Database.BeginTransaction();
+
+        //    try
+        //    {
+        //        foreach (var item in cartItems)
+        //        {
+        //            order.OrderItems.Add(new OrderItem
+        //            {
+        //                ProductId = item.Product.Id,
+        //                Quantity = item.Quantity,
+        //                Price = item.Product.Price,
+        //                CreatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+        //            });
+        //        }
+
+        //        dbcontext.Orders.Add(order);
+        //        dbcontext.SaveChanges();
+
+        //        transaction.Commit();
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        transaction.Rollback();
+        //        return false;
+        //    }
+        //}
+
+
         public bool PlaceOrder(Order order, List<CartItem> cartItems)
         {
             using var transaction = dbcontext.Database.BeginTransaction();
@@ -41,16 +72,33 @@ namespace SportsPlanet.Services
             {
                 foreach (var item in cartItems)
                 {
+                    // Fetch product from DB
+                    var product = dbcontext.Products
+                                           .FirstOrDefault(p => p.Id == item.Product.Id);
+
+                    if (product == null)
+                        throw new Exception("Product not found");
+
+                    // Check stock availability
+                    if (product.Quantity < item.Quantity)
+                        throw new Exception($"Not enough stock for product {product.ProductName}");
+
+                    // Deduct quantity
+                    product.Quantity -= item.Quantity;
+
+                    // Add order item
                     order.OrderItems.Add(new OrderItem
                     {
-                        ProductId = item.Product.Id,
+                        ProductId = product.Id,
                         Quantity = item.Quantity,
-                        Price = item.Product.Price,
+                        Price = product.Price,
                         CreatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
                     });
                 }
 
                 dbcontext.Orders.Add(order);
+
+                // Save both order + updated product quantities
                 dbcontext.SaveChanges();
 
                 transaction.Commit();
@@ -85,6 +133,12 @@ namespace SportsPlanet.Services
                     ("," + p.Tags.ToLower().Replace(" ", "") + ",")
                     .Contains("," + tag + ","))
                 .ToList();
+        }
+
+
+        public Product? GetProductById(int id)
+        {
+            return dbcontext.Products.FirstOrDefault(p => p.Id == id);
         }
     }
 }
