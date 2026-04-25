@@ -33,37 +33,7 @@ namespace SportsPlanet.Services
                            .FirstOrDefault(u => u.Email == email);
         }
 
-        //public bool PlaceOrder(Order order, List<CartItem> cartItems)
-        //{
-        //    using var transaction = dbcontext.Database.BeginTransaction();
-
-        //    try
-        //    {
-        //        foreach (var item in cartItems)
-        //        {
-        //            order.OrderItems.Add(new OrderItem
-        //            {
-        //                ProductId = item.Product.Id,
-        //                Quantity = item.Quantity,
-        //                Price = item.Product.Price,
-        //                CreatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-        //            });
-        //        }
-
-        //        dbcontext.Orders.Add(order);
-        //        dbcontext.SaveChanges();
-
-        //        transaction.Commit();
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        transaction.Rollback();
-        //        return false;
-        //    }
-        //}
-
-
+       
         public bool PlaceOrder(Order order, List<CartItem> cartItems)
         {
             using var transaction = dbcontext.Database.BeginTransaction();
@@ -139,6 +109,70 @@ namespace SportsPlanet.Services
         public Product? GetProductById(int id)
         {
             return dbcontext.Products.FirstOrDefault(p => p.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        public bool DeleteProduct(Product product)
+        {
+            dbcontext.Products.Remove(product);
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        public bool AddProduct(Product product)
+        {
+            try
+            {
+                dbcontext.Products.Add(product);
+                return dbcontext.SaveChanges() > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public List<Order> GetOrdersByStatus(string status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+                return new List<Order>();
+
+            status = status.Trim().ToLower();
+
+            return dbcontext.Orders
+                .Where(o => o.Status.ToLower() == status)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Include(o => o.User) // Including User Info too with every order
+                .OrderByDescending(o => o.Id)
+                .ToList();
+        }
+
+        public bool UpdateOrderStatus(int orderId, string newStatus)
+        {
+            try
+            {
+                var order = dbcontext.Orders.FirstOrDefault(o => o.Id == orderId);
+
+                if (order == null)
+                    return false;
+
+                newStatus = newStatus.Trim().ToUpper();
+
+                if (order.Status == newStatus)
+                    return true;
+
+                order.Status = newStatus;
+
+                return dbcontext.SaveChanges() > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

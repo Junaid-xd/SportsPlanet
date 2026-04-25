@@ -1,46 +1,159 @@
-﻿using System;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.ComponentModel;
+
+//namespace SportsPlanet.Models;
+
+//public partial class Product: INotifyPropertyChanged
+//{
+//    public int Id { get; set; }
+
+//    public string ProductName { get; set; } = null!;
+
+//    public decimal Price { get; set; }
+
+//    private int quantity;
+
+//    public int Quantity
+//    {
+//        get => quantity;
+//        set
+//        {
+//            if (quantity != value)
+//            {
+//                quantity = value;
+//                OnPropertyChanged(nameof(Quantity));
+//            }
+//        }
+//    }
+
+//    public string? ImgPath { get; set; }
+
+//    public string? Tags { get; set; }
+
+//    public DateTime? AvailabilityDate { get; set; }
+
+//    public long CreatedAt { get; set; }
+
+//    public virtual ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
+
+//    public event PropertyChangedEventHandler? PropertyChanged;
+
+//    protected void OnPropertyChanged(string name)
+//    {
+//        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace SportsPlanet.Models;
-
-public partial class Product: INotifyPropertyChanged
+namespace SportsPlanet.Models
 {
-    public int Id { get; set; }
-
-    public string ProductName { get; set; } = null!;
-
-    public decimal Price { get; set; }
-
-    private int quantity;
-
-    public int Quantity
+    public partial class Product : INotifyPropertyChanged
     {
-        get => quantity;
-        set
+        public int Id { get; set; }
+
+        private string productName = null!;
+        public string ProductName
         {
-            if (quantity != value)
+            get => productName;
+            set
             {
-                quantity = value;
-                OnPropertyChanged(nameof(Quantity));
+                if (productName != value)
+                {
+                    productName = value;
+                    OnPropertyChanged(nameof(ProductName));
+                }
             }
         }
-    }
 
-    public string? ImgPath { get; set; }
+        private decimal price;
+        public decimal Price
+        {
+            get => price;
+            set
+            {
+                if (price != value)
+                {
+                    price = value;
+                    OnPropertyChanged(nameof(Price));
+                }
+            }
+        }
 
-    public string? Tags { get; set; }
+        private int quantity;
+        public int Quantity
+        {
+            get => quantity;
+            set
+            {
+                if (quantity != value)
+                {
+                    quantity = value;
+                    OnPropertyChanged(nameof(Quantity));
+                }
+            }
+        }
 
-    public DateTime? AvailabilityDate { get; set; }
+        private string? imgPath;
+        public string? ImgPath
+        {
+            get => imgPath;
+            set
+            {
+                if (imgPath != value)
+                {
+                    imgPath = value;
+                    OnPropertyChanged(nameof(ImgPath));
+                }
+            }
+        }
 
-    public long CreatedAt { get; set; }
+        private string? tags;
+        public string? Tags
+        {
+            get => tags;
+            set
+            {
+                if (tags != value)
+                {
+                    tags = value;
+                    OnPropertyChanged(nameof(Tags));
+                }
+            }
+        }
 
-    public virtual ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
+        public DateTime? AvailabilityDate { get; set; }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+        public long CreatedAt { get; set; }
 
-    protected void OnPropertyChanged(string name)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+
+        // ================= NOTIFICATION =================
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

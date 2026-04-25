@@ -5,6 +5,12 @@
     <Compile Update="Components\Header.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AdminDispatchOrders.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AdminManageProducts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Dashboard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

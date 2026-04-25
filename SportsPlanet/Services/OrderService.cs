@@ -61,5 +61,15 @@ namespace SportsPlanet.Services
         {
             return dbService.GetOrdersByUserId(userId);
         }
+
+        public List<Order> GetOrdersByStatus(String status)
+        {
+            return dbService.GetOrdersByStatus(status);
+        }
+
+        public bool UpdateOrderStatus(int orderId, string newStatus)
+        {
+            return dbService.UpdateOrderStatus(orderId, newStatus);
+        }
     }
 }

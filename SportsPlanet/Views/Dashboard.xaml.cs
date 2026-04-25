@@ -22,7 +22,6 @@ namespace SportsPlanet.Views
             frame = fra;
             HeaderControl.SetFrame(frame);
             HeaderControl.SetActive("All Products");
-            HeaderControl.OnFilterSelected += FilterProducts;
 
             productService = new ProductService();
             authService = new AuthService();
@@ -191,9 +190,9 @@ namespace SportsPlanet.Views
                 bool success = orderService.PlaceOrder(
                     AuthService.loggedInUser.Id,
                     CartService.CartItems.ToList(),
-                    AddressBox.Text,
                     DeliveryTypeBox.Text,
-                    PaymentBox.Text
+                    PaymentBox.Text,
+                    AddressBox.Text
                 );
 
                 // 4. Handle result
@@ -249,12 +248,44 @@ namespace SportsPlanet.Views
 
             return true;
         }
-        private void FilterProducts(string tag)
+
+        private void ApplyFilter(string tag)
         {
             var list = productService.GetProductsByTag(tag);
+
             Products.Clear();
+
             foreach (var p in list)
                 Products.Add(p);
+        }
+        private void FilterAllClick(object sender, RoutedEventArgs e)
+        {
+            LoadProducts();
+        }
+
+        private void FilterNewClick(object sender, RoutedEventArgs e)
+        {
+            ApplyFilter("new");
+        }
+
+        private void FilterBatsClick(object sender, RoutedEventArgs e)
+        {
+            ApplyFilter("bat");
+        }
+
+        private void FilterBallsClick(object sender, RoutedEventArgs e)
+        {
+            ApplyFilter("ball");
+        }
+
+        private void FilterBadmintonClick(object sender, RoutedEventArgs e)
+        {
+            ApplyFilter("badminton");
+        }
+
+        private void FilterKitsClick(object sender, RoutedEventArgs e)
+        {
+            ApplyFilter("kit");
         }
     }
 }

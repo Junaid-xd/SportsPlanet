@@ -43,7 +43,14 @@ namespace SportsPlanet.Views
                 
                 if(authService.login(T1.Text, T2.Text))
                 {
-                    frame.Navigate(new Dashboard(frame));
+                    if(AuthService.loggedInUser.Role == "USER")
+                    {
+                        frame.Navigate(new Dashboard(frame));
+                    }
+                    else if(AuthService.loggedInUser.Role == "ADMIN")
+                    {
+                        frame.Navigate(new AdminManageProducts(frame));
+                    }
                 }
                 else
                 {

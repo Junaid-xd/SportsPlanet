@@ -47,6 +47,8 @@ C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Components\Header.baml
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Resources\Themes\ThemeColors.baml
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Components\Header.g.cs
+C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\AdminDispatchOrders.g.cs
+C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\AdminManageProducts.g.cs
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\Dashboard.g.cs
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\LoginPage.g.cs
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\MainWindow.g.cs
@@ -57,6 +59,8 @@ C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet_MarkupCompile.cache
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet_MarkupCompile.lref
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\App.baml
+C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\AdminDispatchOrders.baml
+C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\AdminManageProducts.baml
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\Dashboard.baml
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\LoginPage.baml
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\Views\MainWindow.baml
@@ -67,10 +71,10 @@ C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.AssemblyInfoInputs.cache
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.AssemblyInfo.cs
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.csproj.CoreCompileInputs.cache
+C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.sourcelink.json
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPl.DCD297C1.Up2Date
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.dll
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\refint\SportsPlanet.dll
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.pdb
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.genruntimeconfig.cache
 C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\ref\SportsPlanet.dll
-C:\Users\Junaid Ali\Desktop\EAD Project\SportsPlanet\SportsPlanet\obj\Debug\net8.0-windows\SportsPlanet.sourcelink.json

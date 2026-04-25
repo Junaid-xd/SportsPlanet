@@ -21,7 +21,6 @@ namespace SportsPlanet.Components
     {
         private Frame? frame;
         private Button? activeButton;
-        public event Action<string>? OnFilterSelected;
 
         public Header()
         {
@@ -41,11 +40,6 @@ namespace SportsPlanet.Components
             Button? btn = btnName switch
             {
                 "All Products" => AllProductsBtn,
-                "New Arrivals" => NewArrivalBtn,
-                "Bats" => BatsBtn,
-                "Balls" => BallsBtn,
-                "Badminton" => BadmintonBtn,
-                "Kits" => KitsBtn,
                 "Orders" => OrdersBtn,
                 "Manage Products" => ManageProductsBtn,
                 "Reports" => ReportsBtn,
@@ -112,34 +106,22 @@ namespace SportsPlanet.Components
             }
         }
 
-        private void ShowProductsFilterUI()
-        {
-            NewArrivalBtn.Visibility = Visibility.Visible;
-            BatsBtn.Visibility = Visibility.Visible;
-            BallsBtn.Visibility = Visibility.Visible;
-            BadmintonBtn.Visibility = Visibility.Visible;
-            KitsBtn.Visibility = Visibility.Visible;
-        }
 
         private void ShowGeneralUi()
         {
-            ShowProductsFilterUI();
             AllProductsBtn.Visibility = Visibility.Visible;
             loginBtn.Visibility = Visibility.Visible;
             signupBtn.Visibility = Visibility.Visible;
 
-            //SetActive(AllProductsBtn);
         }
 
         private void ShowUserUi()
         {
-            ShowProductsFilterUI();
 
             AllProductsBtn.Visibility = Visibility.Visible;
             OrdersBtn.Visibility = Visibility.Visible;
             logoutBtn.Visibility = Visibility.Visible;
 
-            //SetActive(AllProductsBtn);
         }
 
         private void ShowAdminUi()
@@ -160,42 +142,19 @@ namespace SportsPlanet.Components
             //SetActive(ReportsBtn);
 
         }
-
-        private void HandleNewArrivalClick(object sender, RoutedEventArgs e)
-        {
-            SetActive("New Arrivals");
-            OnFilterSelected?.Invoke("new");
-        }
-
-
-        private void HandleBatsClick(object sender, RoutedEventArgs e)
-        {
-            SetActive("Bats");
-            OnFilterSelected?.Invoke("bat");
-        }
-
-        private void HandleBallClick(object sender, RoutedEventArgs e)
-        {
-            SetActive("Balls");
-            OnFilterSelected?.Invoke("ball");
-        }
-
-        private void HandleBadmintonClick(object sender, RoutedEventArgs e)
-        {
-            SetActive("Badminton");
-            OnFilterSelected?.Invoke("badminton");
-        }
-
-        private void HandleKitsClick(object sender, RoutedEventArgs e)
-        {
-            SetActive("Kits");
-            OnFilterSelected?.Invoke("kit");
-        }
-
-
         private void HandleAllProductsClick(object sender, RoutedEventArgs e)
         {
             frame.Navigate(new Dashboard(frame));
+        }
+
+        private void HandleDispatchOrdersClick(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new AdminDispatchOrders(frame));
+        }
+
+        private void HandleManageProductsClick(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new AdminManageProducts(frame));
         }
 
     }
