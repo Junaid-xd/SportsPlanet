@@ -1,4 +1,5 @@
-﻿using SportsPlanet.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SportsPlanet.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,12 +38,17 @@ namespace SportsPlanet.Services
             decimal total = cartItems.Sum(x => x.TotalPrice);
 
             // 4. Create Order object
+
+
+            var localTime = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(5));
+
+
             var order = new Order
             {
                 UserId = userId,
                 TotalAmount = total,
                 Status = "Pending",
-                CreatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                CreatedAt = localTime.ToUnixTimeSeconds(),
                 DeliveryType = deliveryType,
                 PaymentMethod = paymentMethod,
                 Address = address
@@ -70,6 +76,11 @@ namespace SportsPlanet.Services
         public bool UpdateOrderStatus(int orderId, string newStatus)
         {
             return dbService.UpdateOrderStatus(orderId, newStatus);
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            return dbService.GetAllOrders();
         }
     }
 }

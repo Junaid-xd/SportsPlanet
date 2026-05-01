@@ -70,6 +70,7 @@
     <SolidColorBrush x:Key="OverlayBg" Color="#80000000"/>
 
     <!-- ================= MENU BUTTON ================= -->
+    
 
     <Style x:Key="MenuButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
@@ -106,6 +107,27 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- ================= SUPER ADMIN REPORTS ================= -->
+    <Style x:Key="CardStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource CardBg}"/>
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Padding" Value="15"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="BorderBrush" Value="{StaticResource OrderCardBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+    </Style>
+
+    <Style x:Key="KpiTextTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource SecondaryText}"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
+
+    <Style x:Key="KpiTextValue" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
 </ResourceDictionary>

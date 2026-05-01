@@ -174,5 +174,18 @@ namespace SportsPlanet.Services
                 return false;
             }
         }
+
+
+        public List<Order> GetAllOrders()
+        {
+            return dbcontext.Orders
+                .Include(o => o.User)
+                .ToList();
+        }
+
+        public int GetTotalUsers()
+        {
+            return dbcontext.Users.Count();
+        }
     }
 }

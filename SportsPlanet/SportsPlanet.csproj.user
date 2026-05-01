@@ -5,7 +5,10 @@
     <Compile Update="Components\Header.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\AdminDispatchOrders.xaml.cs">
+    <Compile Update="Views\AdminDispatchedOrders.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AdminPendingOrders.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\AdminManageProducts.xaml.cs">
@@ -21,6 +24,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\SignupPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SuperAdminCreateNewAdmin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SuperAdminReports.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

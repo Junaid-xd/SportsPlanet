@@ -51,6 +51,10 @@ namespace SportsPlanet.Views
                     {
                         frame.Navigate(new AdminManageProducts(frame));
                     }
+                    else if (AuthService.loggedInUser.Role == "SUPER_ADMIN")
+                    {
+                        frame.Navigate(new SuperAdminReports(frame));
+                    }
                 }
                 else
                 {

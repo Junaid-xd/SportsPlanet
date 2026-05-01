@@ -43,7 +43,9 @@ namespace SportsPlanet.Components
                 "Orders" => OrdersBtn,
                 "Manage Products" => ManageProductsBtn,
                 "Reports" => ReportsBtn,
-                "Dispatch Orders" => DispatchOrdersBtn,
+                "Create New Admin" => CreateNewAdminAndSuperAdminBtn,
+                "Pending Orders" => PendingOrdersBtn,
+                "Dispatched Orders" => DispatchedOrdersBtn,
                 _ => null
             };
 
@@ -109,7 +111,7 @@ namespace SportsPlanet.Components
 
         private void ShowGeneralUi()
         {
-            AllProductsBtn.Visibility = Visibility.Visible;
+            //AllProductsBtn.Visibility = Visibility.Visible;
             loginBtn.Visibility = Visibility.Visible;
             signupBtn.Visibility = Visibility.Visible;
 
@@ -127,8 +129,9 @@ namespace SportsPlanet.Components
         private void ShowAdminUi()
         {
             ManageProductsBtn.Visibility = Visibility.Visible;
-            DispatchOrdersBtn.Visibility = Visibility.Visible;
+            PendingOrdersBtn.Visibility = Visibility.Visible;
             logoutBtn.Visibility = Visibility.Visible;
+            DispatchedOrdersBtn.Visibility = Visibility.Visible;
 
             //SetActive(ManageProductsBtn);
         }
@@ -147,9 +150,9 @@ namespace SportsPlanet.Components
             frame.Navigate(new Dashboard(frame));
         }
 
-        private void HandleDispatchOrdersClick(object sender, RoutedEventArgs e)
+        private void HandlePendingOrdersClick(object sender, RoutedEventArgs e)
         {
-            frame.Navigate(new AdminDispatchOrders(frame));
+            frame.Navigate(new AdminPendingOrders(frame));
         }
 
         private void HandleManageProductsClick(object sender, RoutedEventArgs e)
@@ -157,5 +160,20 @@ namespace SportsPlanet.Components
             frame.Navigate(new AdminManageProducts(frame));
         }
 
+        private void HandleDispatchedOrdersClick(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new AdminDispatchedOrders(frame));
+        }
+
+
+        private void HandleCreateAdminClick(object Sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new SuperAdminCreateNewAdmin(frame));
+        }
+
+        private void HandleReportsBtnClick(object Sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new SuperAdminReports(frame));
+        }
     }
 }

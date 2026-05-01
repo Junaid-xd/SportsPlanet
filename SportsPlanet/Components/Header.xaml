@@ -35,9 +35,10 @@
                         Visibility="Collapsed"/>
 
                 <Button Click="HandleManageProductsClick" Name="ManageProductsBtn" Content="Manage Products" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
-                <Button Name="ReportsBtn" Content="Reports" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
-                <Button Click="HandleDispatchOrdersClick" Name="DispatchOrdersBtn" Content="Dispatch Orders" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
-                <Button Name="CreateNewAdminAndSuperAdminBtn" Content="Create New Admin" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Click="HandleReportsBtnClick"  Name="ReportsBtn" Content="Reports" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Click="HandlePendingOrdersClick" Name="PendingOrdersBtn" Content="Pending Orders" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Click="HandleDispatchedOrdersClick" Name="DispatchedOrdersBtn" Content="Dispatched Orders" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
+                <Button Click="HandleCreateAdminClick" Name="CreateNewAdminAndSuperAdminBtn" Content="Create New Admin" Style="{StaticResource MenuButtonStyle}" Visibility="Collapsed"/>
 
             </StackPanel>
 
