@@ -58,10 +58,10 @@ namespace SportsPlanet.Views
                 OrdersItemsControl.ItemsSource = null;
                 OrdersItemsControl.ItemsSource = orders;
 
-                if (orders.Count == 0)
-                {
-                    MessageBox.Show("No orders found!");
-                }
+                //if (orders.Count == 0)
+                //{
+                //    MessageBox.Show("No orders found!");
+                //}
             }
             catch (Exception ex)
             {

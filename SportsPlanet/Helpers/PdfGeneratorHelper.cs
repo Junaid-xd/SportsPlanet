@@ -32,7 +32,7 @@ namespace SportsPlanet.Helpers
 
             using var gfx = XGraphics.FromPdfPage(page);
 
-            // SAFE FONTS (NO ARIAL = NO CRASH)
+            // FONTS 
             var titleFont = new XFont("Verdana", 16, XFontStyleEx.Bold);
             var headerFont = new XFont("Verdana", 11, XFontStyleEx.Bold);
             var textFont = new XFont("Verdana", 10, XFontStyleEx.Regular);

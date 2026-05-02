@@ -3,6 +3,7 @@ using SportsPlanet.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace SportsPlanet.Services
 {
@@ -23,6 +24,13 @@ namespace SportsPlanet.Services
 
         public bool AddNewUser(User user)
         {
+            var existingUser = FindByEmail(user.Email);
+
+            if (existingUser != null)
+            {
+                return false;
+            }
+
             dbcontext.Users.Add(user);
             return dbcontext.SaveChanges() > 0;
         }

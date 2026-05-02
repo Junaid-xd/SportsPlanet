@@ -37,7 +37,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <!-- FILTERS (ADDED ONLY THIS PART) -->
+                    <!-- FILTERS -->
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center"
                                 Margin="10">
@@ -75,7 +75,11 @@
                     </StackPanel>
 
                     <!-- PRODUCTS -->
-                    <ScrollViewer Grid.Row="1">
+                    <ScrollViewer Grid.Row="1" 
+                                  HorizontalAlignment="Center"
+                                  VerticalScrollBarVisibility="Hidden"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  >
                         <ItemsControl Name="ProductsItemsControl">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -85,7 +89,7 @@
 
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Width="200"
+                                    <Border Width="180"
                                             Margin="10"
                                             Padding="10"
                                             Background="{StaticResource CardBg}"
@@ -153,11 +157,12 @@
 
                 </Grid>
 
-                <!-- CART (UNCHANGED) -->
+                <!-- CART -->
                 <Border Grid.Column="1"
                         Background="{StaticResource CartPanelBg}"
-                        Padding="15"
-                        CornerRadius="10">
+                        Padding="20 15 15 15"
+                        BorderThickness="1 0 0 0"
+                        BorderBrush="White">
 
                     <Grid>
 
@@ -418,6 +423,7 @@
                                Margin="0,15,0,5"/>
 
                     <ComboBox Name="DeliveryTypeBox"
+                              SelectionChanged="DeliveryTypeChanged"
                               Height="35"
                               Foreground="Black"
                               BorderBrush="#334155"
@@ -425,8 +431,8 @@
                               Padding="5"
                               SelectedIndex="0">
 
-                        <ComboBoxItem Content="Standard"/>
-                        <ComboBoxItem Content="Express"/>
+                        <ComboBoxItem Content="Standard (RS 300)"/>
+                        <ComboBoxItem Content="Express (RS 500)"/>
                     </ComboBox>
 
                     <TextBlock Text="Payment Method"
@@ -443,6 +449,24 @@
 
                         <ComboBoxItem Content="COD (Cash on Delivery)"/>
                     </ComboBox>
+
+                    <Border Background="{StaticResource CartSummaryBg}"
+                            Padding="12"
+                            Margin="0,15,0,0"
+                            CornerRadius="8">
+
+                        <StackPanel>
+                            <TextBlock Text="Total (including delivery)"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       FontSize="12"/>
+
+                            <TextBlock Name="CheckoutTotalText"
+                                       Text="Rs. 0"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       FontSize="18"
+                                       FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
 
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"

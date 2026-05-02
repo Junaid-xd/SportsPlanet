@@ -156,6 +156,8 @@ namespace SportsPlanet.Views
             }
 
             CheckoutOverlay.Visibility = Visibility.Visible;
+
+            UpdateCheckoutTotal();
         }
 
         private void CloseCheckout(object sender, RoutedEventArgs e)
@@ -173,6 +175,12 @@ namespace SportsPlanet.Views
             if (!AuthService.isLoggedIn)
             {
                 frame.Navigate(new LoginPage(frame));
+                return;
+            }
+
+            if(AddressBox.Text == "")
+            {
+                MessageBox.Show("Provide shipping address.");
                 return;
             }
 
@@ -349,6 +357,37 @@ namespace SportsPlanet.Views
         private void FilterKitsClick(object sender, RoutedEventArgs e)
         {
             ApplyFilter("kit");
+        }
+
+        private void UpdateCheckoutTotal()
+        {
+            if (CheckoutTotalText == null)
+                return;
+
+            decimal itemsTotal = CartService.CartItems
+                .Sum(x => x.Product.Price * x.Quantity);
+
+            decimal delivery = GetDeliveryCharges();
+
+            decimal finalTotal = itemsTotal + delivery;
+
+            CheckoutTotalText.Text = $"{finalTotal}";
+        }
+
+        private decimal GetDeliveryCharges()
+        {
+            if (DeliveryTypeBox.SelectedIndex == 0)
+                return 300;
+
+            if (DeliveryTypeBox.SelectedIndex == 1)
+                return 500;
+
+            return 0;
+        }
+
+        private void DeliveryTypeChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateCheckoutTotal();
         }
     }
 }

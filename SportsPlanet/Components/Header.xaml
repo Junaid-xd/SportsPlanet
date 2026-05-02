@@ -48,9 +48,42 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center">
 
-                <Button Content="Login" Name="loginBtn" Click="LoginClick" Visibility="Collapsed"/>
+                <!--<Button Content="Login" Name="loginBtn" Click="LoginClick" Visibility="Collapsed" />
                 <Button Content="Signup" Name="signupBtn" Click="SignupClick" Visibility="Collapsed"/>
-                <Button Content="Logout" Name="logoutBtn" Click="LogoutClick" Visibility="Collapsed"/>
+                <Button Content="Logout" Name="logoutBtn" Click="LogoutClick" Visibility="Collapsed"/>-->
+
+                <Button Content="Login"
+                        Name="loginBtn"
+                        Click="LoginClick"
+                        Visibility="Collapsed"
+                        Margin="5"
+                        Padding="5"
+                        BorderThickness="0"
+                        FontWeight="Bold"
+                        Background="Green"
+                        Foreground="White"/>
+
+                <Button Content="Signup"
+                        Name="signupBtn"
+                        Click="SignupClick"
+                        Visibility="Collapsed"
+                        Margin="5"
+                        Padding="5"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Background="Green"
+                        Foreground="White"/>
+
+                <Button Content="Logout"
+                        Name="logoutBtn"
+                        Click="LogoutClick"
+                        Margin="5"
+                        Padding="5"
+                        BorderThickness="0"
+                        FontWeight="Bold"
+                        Visibility="Collapsed"
+                        Background="Red"
+                        Foreground="White"/>
 
             </StackPanel>
 
