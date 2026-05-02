@@ -1,4 +1,5 @@
-﻿using SportsPlanet.Models;
+﻿using SportsPlanet.Helpers;
+using SportsPlanet.Models;
 using SportsPlanet.Services;
 
 using System.Collections.ObjectModel;
@@ -187,7 +188,7 @@ namespace SportsPlanet.Views
                 // 3. Call OrderService
                 var orderService = new OrderService();
 
-                bool success = orderService.PlaceOrder(
+                int placedOrderId = orderService.PlaceOrder(
                     AuthService.loggedInUser.Id,
                     CartService.CartItems.ToList(),
                     DeliveryTypeBox.Text,
@@ -196,7 +197,7 @@ namespace SportsPlanet.Views
                 );
 
                 // 4. Handle result
-                if (success)
+                if (placedOrderId != 0)
                 {
                     // Clear cart
                     CartService.CartItems.Clear();
@@ -207,7 +208,17 @@ namespace SportsPlanet.Views
                     CheckoutOverlay.Visibility = Visibility.Collapsed;
 
                     refreshPage();
-                    MessageBox.Show("Order placed successfully!");
+                    var result = MessageBox.Show(
+                                    "Order placed successfully!\n\nDo you want to download/print receipt?",
+                                    "Order Success",
+                                    MessageBoxButton.YesNo,
+                                    MessageBoxImage.Question
+                                );
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        GenerateReceipt(placedOrderId);
+                    }
 
 
                 }
@@ -219,6 +230,58 @@ namespace SportsPlanet.Views
             else
             {
                 CheckoutOverlay.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
+        private void GenerateReceipt(int placedOrderId)
+        {
+            try
+            {
+                var orderService = new OrderService();
+
+                // Fetch fresh order from DB
+                var order = orderService.GetOrderWithProductsDetailsById(placedOrderId);
+
+                if (order == null)
+                {
+                    MessageBox.Show("Order not found!");
+                    return;
+                }
+
+                var user = AuthService.loggedInUser;
+
+                var lines = order.OrderItems.Select(x => new ReceiptLine
+                {
+                    ProductName = x.Product?.ProductName ?? "Unknown",
+                    Quantity = x.Quantity,
+                    UnitPrice = x.Price,
+                    TotalPrice = x.Price * x.Quantity
+                }).ToList();
+
+                double grandTotal = (double)order.TotalAmount;
+
+                DateTime date =
+                    DateTimeOffset.FromUnixTimeSeconds(order.CreatedAt).DateTime;
+
+                string path = PdfGeneratorHelper.GenerateBill(
+                    lines,
+                    user,
+                    grandTotal,
+                    order.Id,
+                    date
+                );
+
+                MessageBox.Show($"Receipt saved at:\n{path}");
+
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(path)
+                {
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to generate receipt: " + ex.Message);
             }
         }
 

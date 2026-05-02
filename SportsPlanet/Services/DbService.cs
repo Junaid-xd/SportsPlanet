@@ -34,7 +34,7 @@ namespace SportsPlanet.Services
         }
 
        
-        public bool PlaceOrder(Order order, List<CartItem> cartItems)
+        public int PlaceOrder(Order order, List<CartItem> cartItems)
         {
             using var transaction = dbcontext.Database.BeginTransaction();
 
@@ -72,12 +72,12 @@ namespace SportsPlanet.Services
                 dbcontext.SaveChanges();
 
                 transaction.Commit();
-                return true;
+                return order.Id;
             }
             catch
             {
                 transaction.Rollback();
-                return false;
+                return 0;
             }
         }
 
@@ -104,7 +104,6 @@ namespace SportsPlanet.Services
                     .Contains("," + tag + ","))
                 .ToList();
         }
-
 
         public Product? GetProductById(int id)
         {
@@ -186,6 +185,31 @@ namespace SportsPlanet.Services
         public int GetTotalUsers()
         {
             return dbcontext.Users.Count();
+        }
+
+
+        public Order? GetOrderWithProductsDetailsById(int orderId)
+        {
+            return dbcontext.Orders
+                .Where(o => o.Id == orderId)
+                .Select(o => new Order
+                {
+                    Id = o.Id,
+                    UserId = o.UserId,
+                    CreatedAt = o.CreatedAt,
+                    TotalAmount = o.TotalAmount,
+                    Address = o.Address,
+                    OrderItems = o.OrderItems.Select(oi => new OrderItem
+                    {
+                        Quantity = oi.Quantity,
+                        Price = oi.Price,
+                        Product = new Product
+                        {
+                            ProductName = oi.Product.ProductName
+                        }
+                    }).ToList()
+                })
+                .FirstOrDefault();
         }
     }
 }

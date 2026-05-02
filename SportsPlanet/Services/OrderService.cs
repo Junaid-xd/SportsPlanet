@@ -17,21 +17,21 @@ namespace SportsPlanet.Services
             dbService = new DbService(context);   
         }   
 
-        public bool PlaceOrder(int userId, List<CartItem> cartItems,
+        public int PlaceOrder(int userId, List<CartItem> cartItems,
             string? deliveryType, string? paymentMethod, string? address)
         {
             // 1. Validate cart
             if (cartItems == null || cartItems.Count == 0)
-                return false;
+                return 0;
 
             // 2. Validate products
             foreach (var item in cartItems)
             {
                 if (item.Product == null)
-                    return false;
+                    return 0;
 
                 if (item.Quantity <= 0)
-                    return false;
+                    return 0;
             }
 
             // 3. Calculate total
@@ -55,12 +55,9 @@ namespace SportsPlanet.Services
             };
 
             // 5. Call DB
-            bool result = dbService.PlaceOrder(order, cartItems);
+            int placedOrderId = dbService.PlaceOrder(order, cartItems);
 
-            if (!result)
-                return false;
-
-            return true;
+            return placedOrderId;
         }
 
         public List<Order> GetUserOrders(int userId)
@@ -81,6 +78,11 @@ namespace SportsPlanet.Services
         public List<Order> GetAllOrders()
         {
             return dbService.GetAllOrders();
+        }
+
+        public Order? GetOrderWithProductsDetailsById(int orderId)
+        {
+            return dbService.GetOrderWithProductsDetailsById(orderId);
         }
     }
 }

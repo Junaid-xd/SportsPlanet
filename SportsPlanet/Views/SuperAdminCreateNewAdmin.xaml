@@ -18,10 +18,10 @@
             <!-- Content -->
         </Grid.RowDefinitions>
 
-        <!-- ✅ HEADER COMPONENT -->
+        <!-- HEADER COMPONENT -->
         <components:Header Grid.Row="0" x:Name="HeaderControl"/>
 
-        <!-- ✅ YOUR FORM -->
+        <!-- FORM -->
         <Grid Grid.Row="1"
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
@@ -129,117 +129,5 @@
         </Grid>
 
     </Grid>
-
-
-    <!--<Grid Background="{StaticResource PrimaryBg}">
-
-        <Grid HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Margin="20">
-
-            <Border Padding="20"
-                Background="{StaticResource CardBg}"
-                CornerRadius="12"
-                Width="480"
-                MinWidth="300"
-                MaxWidth="420"
-                HorizontalAlignment="Center">
-
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-
-                    <StackPanel>
-
-                        --><!-- Title --><!--
-                        <TextBlock Text="Create Admin"
-                               Foreground="{StaticResource PrimaryText}"
-                               FontSize="24"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"/>
-
-                        <TextBlock Text="Add Admin or SuperAdmin"
-                               Foreground="{StaticResource SecondaryText}"
-                               FontSize="13"
-                               HorizontalAlignment="Center"
-                               Margin="0,5,0,20"/>
-
-                        --><!-- Full Name --><!--
-                        <TextBlock Text="Full Name"
-                               Foreground="{StaticResource MutedText}"
-                               Margin="0,5"/>
-
-                        <TextBox Name="T1" Height="35"
-                             Background="{StaticResource CardBg}"
-                             Foreground="{StaticResource PrimaryText}"
-                             BorderBrush="#334155"
-                             Padding="8"/>
-
-                        --><!-- Email --><!--
-                        <TextBlock Text="Email"
-                               Foreground="{StaticResource MutedText}"
-                               Margin="0,15,0,5"/>
-
-                        <TextBox Name="T2" Height="35"
-                             Background="{StaticResource CardBg}"
-                             Foreground="{StaticResource PrimaryText}"
-                             BorderBrush="#334155"
-                             Padding="8"/>
-
-                        --><!-- Password --><!--
-                        <TextBlock Text="Password"
-                               Foreground="{StaticResource MutedText}"
-                               Margin="0,15,0,5"/>
-
-                        <TextBox Name="T3" Height="35"
-                             Background="{StaticResource CardBg}"
-                             Foreground="{StaticResource PrimaryText}"
-                             BorderBrush="#334155"
-                             Padding="8"/>
-
-                        --><!-- Confirm Password --><!--
-                        <TextBlock Text="Confirm Password"
-                               Foreground="{StaticResource MutedText}"
-                               Margin="0,15,0,5"/>
-
-                        <TextBox Name="T4" Height="35"
-                             Background="{StaticResource CardBg}"
-                             Foreground="{StaticResource PrimaryText}"
-                             BorderBrush="#334155"
-                             Padding="8"/>
-
-                        --><!-- Role Selection --><!--
-                        <TextBlock Text="Select Role"
-                               Foreground="{StaticResource MutedText}"
-                               Margin="0,15,0,5"/>
-
-                        <ComboBox Name="RoleBox"
-                                  Height="30"
-                                  Foreground="Black"
-                                  BorderBrush="#334155"
-                                  BorderThickness="1"
-                                  SelectedIndex="0">
-
-                            <ComboBoxItem Content="ADMIN"/>
-                            <ComboBoxItem Content="SUPER_ADMIN"/>
-                        </ComboBox>
-
-                       
-
-                        --><!-- Button --><!--
-                        <Button Content="Create Admin"
-                            Height="40"
-                            Margin="0,20,0,0"
-                            Background="{StaticResource PrimaryBlue}"
-                            Foreground="{StaticResource PrimaryText}"
-                            BorderThickness="0"
-                            FontWeight="SemiBold"
-                            Click="CreateAdminClick"/>
-
-                    </StackPanel>
-
-                </ScrollViewer>
-
-            </Border>
-        </Grid>
-
-    </Grid>-->
+    
 </Page>

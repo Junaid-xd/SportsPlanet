@@ -1,11 +1,6 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using SportsPlanet.Models;
 using SportsPlanet.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Controls;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView.Painting;

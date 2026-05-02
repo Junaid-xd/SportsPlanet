@@ -1,148 +1,14 @@
-﻿<!--<Page x:Class="SportsPlanet.Views.OrdersView"
-   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-   xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-   xmlns:local="clr-namespace:SportsPlanet.Views"
-   xmlns:components="clr-namespace:SportsPlanet.Components"
-   mc:Ignorable="d" 
-   Title="OrdersView">
-
-
-    <Grid Background="{StaticResource PrimaryBg}">
-
-
-        --><!-- ================= HEADER ================= --><!--
-        <components:Header x:Name="HeaderControl"/>
-
-        --><!-- ================= CONTENT ================= --><!--
-        <ScrollViewer Margin="0,60,0,0">
-
-            <ItemsControl Name="OrdersItemsControl">
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-
-                        --><!-- ORDER CARD --><!--
-                        <Border Background="{StaticResource CardBg}"
-                            CornerRadius="10"
-                            Padding="15"
-                            Margin="15">
-
-                            <StackPanel>
-
-                                --><!-- ORDER HEADER --><!--
-                                <Grid Margin="0,0,0,10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel>
-
-                                        <TextBlock Text="{Binding Id, StringFormat=Order #{0}}"
-                                               Foreground="{StaticResource PrimaryText}"
-                                               FontWeight="Bold"
-                                               FontSize="14"/>
-
-                                        <TextBlock Text="{Binding CreatedAt}"
-                                               Foreground="{StaticResource SecondaryText}"
-                                               FontSize="12"/>
-
-                                    </StackPanel>
-
-                                    <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-
-                                        <TextBlock Text="{Binding Status}"
-                                               Foreground="{StaticResource Success}"
-                                               FontWeight="Bold"/>
-
-                                        <TextBlock Text="{Binding TotalAmount, StringFormat=Rs. {0}}"
-                                               Foreground="{StaticResource PrimaryText}"
-                                               FontWeight="Bold"/>
-
-                                    </StackPanel>
-                                </Grid>
-
-                                --><!-- ADDRESS --><!--
-                                <TextBlock Text="{Binding Address}"
-                                       Foreground="{StaticResource SecondaryText}"
-                                       Margin="0,0,0,10"/>
-
-                                --><!-- ITEMS --><!--
-                                <ItemsControl ItemsSource="{Binding OrderItems}">
-
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-
-                                            <Border Background="{StaticResource CartItemBg}"
-                                                CornerRadius="8"
-                                                Padding="10"
-                                                Margin="0,0,0,8">
-
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-
-                                                    --><!-- PRODUCT INFO --><!--
-                                                    <StackPanel>
-
-                                                        <TextBlock Text="{Binding Product.ProductName}"
-                                                               Foreground="{StaticResource PrimaryText}"
-                                                               FontWeight="SemiBold"/>
-
-                                                        <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}"
-                                                               Foreground="{StaticResource SecondaryText}"
-                                                               FontSize="12"/>
-
-                                                    </StackPanel>
-
-                                                    --><!-- QTY --><!--
-                                                    <TextBlock Grid.Column="1"
-                                                           Text="{Binding Quantity, StringFormat=Qty: {0}}"
-                                                           Foreground="{StaticResource SecondaryText}"
-                                                           VerticalAlignment="Center"/>
-
-                                                </Grid>
-
-                                            </Border>
-
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-
-                                </ItemsControl>
-
-                            </StackPanel>
-
-                        </Border>
-
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-
-            </ItemsControl>
-
-        </ScrollViewer>
-
-    </Grid>
-</Page>-->
-
-
-
-
-
-
-
-
-
-
-
-<Page x:Class="SportsPlanet.Views.OrdersView"
+﻿<Page x:Class="SportsPlanet.Views.OrdersView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:components="clr-namespace:SportsPlanet.Components"
+      xmlns:conv="clr-namespace:SportsPlanet.Converters"
       Title="OrdersView">
+
+    <!-- RESOURCES -->
+    <Page.Resources>
+        <conv:UnixToDateConverter x:Key="UnixToDateConverter"/>
+    </Page.Resources>
 
     <Grid Background="{StaticResource PrimaryBg}">
 
@@ -155,7 +21,7 @@
         <components:Header x:Name="HeaderControl" Grid.Row="0"/>
 
         <!-- CONTENT -->
-        <ScrollViewer Margin="0,70,0,0" Grid.Row="1">
+        <ScrollViewer Margin="0,15,0,0" Grid.Row="1">
 
             <StackPanel>
 
@@ -164,7 +30,9 @@
                            FontSize="26"
                            FontWeight="Bold"
                            Foreground="{StaticResource PrimaryText}"
-                           Margin="20,10,20,20"/>
+                           Margin="20,0,20,20"/>
+
+
 
                 <ItemsControl Name="OrdersItemsControl">
 
@@ -175,123 +43,169 @@
                             <Border Background="{StaticResource CardBg}"
                                     BorderBrush="{StaticResource OrderCardBorder}"
                                     BorderThickness="1"
-                                    CornerRadius="12"
-                                    Margin="20,0,20,15"
-                                    Padding="15">
+                                    CornerRadius="14"
+                                    Margin="20,0,20,18"
+                                    Padding="18">
 
                                 <StackPanel>
 
                                     <!-- HEADER -->
-                                    <Grid Margin="0,0,0,10">
+                                    <Grid Margin="0,0,0,12">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
+                                        <!-- LEFT: ORDER META -->
                                         <StackPanel>
 
-                                            <TextBlock Text="{Binding Id, StringFormat=Order #{0}}"
-                                                       Foreground="{StaticResource PrimaryText}"
-                                                       FontSize="16"
-                                                       FontWeight="Bold"/>
+                                            <TextBlock Text="Order ID"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       FontSize="11"/>
 
-                                            <TextBlock Text="{Binding CreatedAt}"
-                                                       Foreground="{StaticResource SecondaryText}"
-                                                       FontSize="12"
-                                                       Margin="0,3,0,0"/>
+                                            <TextBlock Text="{Binding Id, StringFormat=# {0}}"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Margin="0,0,0,6"/>
+
+                                            <TextBlock Text="Placed On"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       FontSize="11"/>
+
+                                            <TextBlock Foreground="{StaticResource PrimaryText}"
+                                       FontSize="13">
+                                                <TextBlock.Text>
+                                                    <Binding Path="CreatedAt"
+                                             Converter="{StaticResource UnixToDateConverter}"/>
+                                                </TextBlock.Text>
+                                            </TextBlock>
 
                                         </StackPanel>
 
-                                        <!-- STATUS BADGE -->
+                                        <!-- STATUS -->
                                         <Border Grid.Column="1"
-                                                Padding="8,4"
-                                                CornerRadius="20"
-                                                Background="{StaticResource StatusProcessing}">
+                                Padding="10,5"
+                                CornerRadius="20"
+                                Background="{StaticResource StatusProcessing}"
+                                VerticalAlignment="Top">
 
                                             <TextBlock Text="{Binding Status}"
-                                                       Foreground="White"
-                                                       FontWeight="SemiBold"
-                                                       FontSize="12"/>
+                                       Foreground="White"
+                                       FontWeight="SemiBold"
+                                       FontSize="12"/>
                                         </Border>
-
                                     </Grid>
 
                                     <!-- DIVIDER -->
                                     <Border Height="1"
                                             Background="{StaticResource HoverBg}"
-                                            Margin="0,5,0,10"/>
+                                            Margin="0,8,0,12"/>
 
-                                    <!-- ADDRESS -->
-                                    <TextBlock Text="{Binding Address}"
-                                               Foreground="{StaticResource SecondaryText}"
-                                               FontSize="13"
-                                               Margin="0,0,0,10"/>
+                                    <!-- DELIVERY INFO -->
+                                    <StackPanel Margin="0,0,0,12">
+
+                                        <TextBlock Text="Delivery Address"
+                                                   Foreground="{StaticResource SecondaryText}"
+                                                   FontSize="12"/>
+
+                                        <TextBlock Text="{Binding Address}"
+                                                   Foreground="{StaticResource PrimaryText}"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0,2,0,0"/>
+                                    </StackPanel>
+
+                                    <!-- ITEMS HEADER -->
+                                    <Grid Margin="0,0,0,6">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Item"
+                                                   Foreground="{StaticResource SecondaryText}"
+                                                   FontSize="12"/>
+
+                                        <TextBlock Text="Qty"
+                                                   Grid.Column="1"
+                                                   Margin="20,0"
+                                                   Foreground="{StaticResource SecondaryText}"
+                                                   FontSize="12"/>
+
+                                        <TextBlock Text="Price"
+                                                   Grid.Column="2"
+                                                   Foreground="{StaticResource SecondaryText}"
+                                                   FontSize="12"/>
+                                    </Grid>
 
                                     <!-- ORDER ITEMS -->
                                     <ItemsControl ItemsSource="{Binding OrderItems}">
-
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
 
-                                                <Border Background="{StaticResource CartItemBg}"
-                                                        CornerRadius="8"
-                                                        Padding="10"
-                                                        Margin="0,0,0,8">
+                                                <Grid Margin="0,4">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
 
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                        </Grid.ColumnDefinitions>
+                                                    <!-- PRODUCT -->
+                                                    <TextBlock Text="{Binding Product.ProductName}"
+                                                               Foreground="{StaticResource PrimaryText}"
+                                                               FontWeight="SemiBold"/>
 
-                                                        <!-- PRODUCT INFO -->
-                                                        <StackPanel>
+                                                    <!-- QTY -->
+                                                    <TextBlock Grid.Column="1"
+                                                               Margin="20,0"
+                                                               Text="{Binding Quantity}"
+                                                               Foreground="{StaticResource PrimaryText}"/>
 
-                                                            <TextBlock Text="{Binding Product.ProductName}"
-                                                                       Foreground="{StaticResource PrimaryText}"
-                                                                       FontWeight="SemiBold"/>
+                                                    <!-- PRICE -->
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{Binding Price, StringFormat=Rs. {0}}"
+                                                               Foreground="{StaticResource PrimaryText}"/>
 
-                                                            <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}"
-                                                                       Foreground="{StaticResource SecondaryText}"
-                                                                       FontSize="12"/>
-
-                                                        </StackPanel>
-
-                                                        <!-- QTY -->
-                                                        <Border Grid.Column="1"
-                                                                Background="{StaticResource HoverBg}"
-                                                                Padding="8,3"
-                                                                CornerRadius="6">
-
-                                                            <TextBlock Text="{Binding Quantity, StringFormat=Qty: {0}}"
-                                                                       Foreground="{StaticResource PrimaryText}"
-                                                                       FontSize="12"/>
-                                                        </Border>
-
-                                                    </Grid>
-
-                                                </Border>
+                                                </Grid>
 
                                             </DataTemplate>
                                         </ItemsControl.ItemTemplate>
-
                                     </ItemsControl>
 
+                                    <!-- DIVIDER -->
+                                    <Border Height="1"
+                                            Background="{StaticResource HoverBg}"
+                                            Margin="0,12,0,10"/>
+
                                     <!-- TOTAL -->
-                                    <Grid Margin="0,10,0,0">
+                                    <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="Total"
-                                                   Foreground="{StaticResource SecondaryText}"/>
+                                        <TextBlock Text="Total Amount"
+                                                   Foreground="{StaticResource SecondaryText}"
+                                                   FontSize="13"/>
 
                                         <TextBlock Grid.Column="1"
                                                    Text="{Binding TotalAmount, StringFormat=Rs. {0}}"
                                                    Foreground="{StaticResource PrimaryText}"
-                                                   FontWeight="Bold"/>
+                                                   FontWeight="Bold"
+                                                   FontSize="15"/>
                                     </Grid>
+
+                                    <Button Content="Print Receipt"
+                                            Margin="0,12,0,0"
+                                            Padding="10,6"
+                                            HorizontalAlignment="Right"
+                                            Background="Green"
+                                            Foreground="White"
+                                            BorderThickness="0"
+                                            Cursor="Hand"
+                                            Tag="{Binding Id}"
+                                            Click="PrintReceiptClick"/>
 
                                 </StackPanel>
 
