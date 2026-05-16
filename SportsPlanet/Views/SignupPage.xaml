@@ -39,6 +39,21 @@
                                    HorizontalAlignment="Center"
                                    Margin="0,5,0,20"/>
 
+                        <Border x:Name="SuccessBox"
+                                Background="#DCFCE7"
+                                BorderBrush="#22C55E"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Padding="10"
+                                Margin="0,0,0,15"
+                                Visibility="Collapsed">
+
+                            <TextBlock x:Name="SuccessText"
+                                       Text="Account created successfully!"
+                                       Foreground="#166534"
+                                       FontWeight="SemiBold"/>
+                        </Border>
+
                         <!-- Name -->
                         <TextBlock Text="Full Name"
                                    Foreground="{StaticResource MutedText}"
@@ -52,6 +67,11 @@
                                  Cursor="IBeam"
                                  HorizontalAlignment="Stretch"
                                  Name="T1"/>
+
+                        <TextBlock x:Name="NameError"
+                                   Foreground="#EF4444"
+                                   FontSize="11"
+                                   Margin="5,3,0,0"/>
 
                         <!-- Email -->
                         <TextBlock Text="Email"
@@ -67,6 +87,11 @@
                                  HorizontalAlignment="Stretch"
                                  Name="T2"/>
 
+                        <TextBlock x:Name="EmailError"
+                                   Foreground="#EF4444"
+                                   FontSize="11"
+                                   Margin="5,3,0,0"/>
+
                         <!-- Password -->
                         <TextBlock Text="Password"
                                    Foreground="{StaticResource MutedText}"
@@ -81,6 +106,13 @@
                                 HorizontalAlignment="Stretch"
                                 Name="T3"/>
 
+                        <TextBlock x:Name="PasswordError"
+                                   Foreground="#EF4444"
+                                   FontSize="11"
+                                   Margin="5,3,0,0"/>
+
+                        
+                        <!-- Confirm Password -->
                         <TextBlock Text="Confirm Password"
                                    Foreground="{StaticResource MutedText}"
                                    Margin="0,15,0,5"/>
@@ -94,17 +126,25 @@
                                 HorizontalAlignment="Stretch"
                                 Name="T4"/>
 
+                        <TextBlock x:Name="ConfirmPasswordError"
+                                   Foreground="#EF4444"
+                                   FontSize="11"
+                                   Margin="5,3,0,0"/>
+
+
+                       
+
                         <!-- Signup Button -->
                         <Button Content="Create Account"
                                 Height="40"
                                 Margin="0,20,0,0"
-                                Background="{StaticResource PrimaryBlue}"
-                                Foreground="{StaticResource PrimaryText}"
+                                Style="{StaticResource PrimaryButtonStyle}"
                                 BorderThickness="0"
                                 FontWeight="SemiBold"
                                 Cursor="Hand"
                                 HorizontalAlignment="Stretch"
                                 Click="SignupButtonClick"/>
+                       
 
                         <!-- Footer -->
                         <Grid>

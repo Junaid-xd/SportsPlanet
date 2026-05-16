@@ -349,9 +349,9 @@ namespace SportsPlanet.Views
             ApplyFilter("ball");
         }
 
-        private void FilterBadmintonClick(object sender, RoutedEventArgs e)
+        private void FilterRacketsClick(object sender, RoutedEventArgs e)
         {
-            ApplyFilter("badminton");
+            ApplyFilter("racket");
         }
 
         private void FilterKitsClick(object sender, RoutedEventArgs e)

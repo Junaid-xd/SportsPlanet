@@ -5,7 +5,8 @@ using SportsPlanet.Services;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
+using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace SportsPlanet.Views
 {
@@ -65,13 +66,57 @@ namespace SportsPlanet.Views
             EditOverlay.Visibility = Visibility.Collapsed;
         }
 
+
         private void UpdateProductClick(object sender, RoutedEventArgs e)
         {
             if (selectedProduct == null) return;
 
+            // reset errors
+            EditNameError.Text = "";
+            EditPriceError.Text = "";
+            EditQuantityError.Text = "";
+            EditImageError.Text = "";
+
+            NameBox.BorderBrush = Brushes.Gray;
+            PriceBox.BorderBrush = Brushes.Gray;
+            QuantityBox.BorderBrush = Brushes.Gray;
+            ImageBox.BorderBrush = Brushes.Gray;
+
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(NameBox.Text))
+            {
+                EditNameError.Text = "Name is required";
+                NameBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            if (!decimal.TryParse(PriceBox.Text, out decimal price) || price <= 0)
+            {
+                EditPriceError.Text = "Valid price required";
+                PriceBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            if (!int.TryParse(QuantityBox.Text, out int qty) || qty < 0)
+            {
+                EditQuantityError.Text = "Valid quantity required";
+                QuantityBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            if (string.IsNullOrWhiteSpace(ImageBox.Text))
+            {
+                EditImageError.Text = "Image is required";
+                ImageBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            if (hasError) return;
+
             selectedProduct.ProductName = NameBox.Text;
-            selectedProduct.Price = decimal.Parse(PriceBox.Text);
-            selectedProduct.Quantity = int.Parse(QuantityBox.Text);
+            selectedProduct.Price = price;
+            selectedProduct.Quantity = qty;
             selectedProduct.ImgPath = ImageBox.Text;
             selectedProduct.Tags = TagsBox.Text;
 
@@ -79,13 +124,33 @@ namespace SportsPlanet.Views
 
             if (success)
             {
-                // UI auto updates because ObservableCollection + same object reference
                 EditOverlay.Visibility = Visibility.Collapsed;
+                ShowSuccess("Product updated successfully!");
             }
             else
             {
-                MessageBox.Show("Update failed!");
+                ShowError("Update failed!");
             }
+        }
+
+        private async void ShowSuccess(string msg)
+        {
+            Toast.Background = new SolidColorBrush(Color.FromRgb(34, 197, 94));
+            ToastText.Text = msg;
+            Toast.Visibility = Visibility.Visible;
+
+            await Task.Delay(2000);
+            Toast.Visibility = Visibility.Collapsed;
+        }
+
+        private async void ShowError(string msg)
+        {
+            Toast.Background = new SolidColorBrush(Color.FromRgb(239, 68, 68));
+            ToastText.Text = msg;
+            Toast.Visibility = Visibility.Visible;
+
+            await Task.Delay(2000);
+            Toast.Visibility = Visibility.Collapsed;
         }
         private void DeleteProductClick(object sender, RoutedEventArgs e)
         {
@@ -131,7 +196,8 @@ namespace SportsPlanet.Views
         {
             var dialog = new OpenFileDialog
             {
-                Filter = "Image Files|*.jpg;*.png;*.jpeg"
+                //Filter = "Image Files|*.jpg;*.png;*.jpeg"
+                Filter = "Image Files|*.jpg;*.png;*.jpeg;*.webp"
             };
 
             if (dialog.ShowDialog() == true)
@@ -149,37 +215,116 @@ namespace SportsPlanet.Views
             AddTagsBox.Text = "";
         }
 
+
+        private void QtyText_Loaded(object sender, RoutedEventArgs e)
+        {
+            var tb = sender as TextBlock;
+            if (tb == null) return;
+
+            var product = tb.DataContext as Product;
+            if (product == null) return;
+
+            tb.Inlines.Clear();
+
+            tb.Inlines.Add(new Run("Qty: ")
+            {
+                Foreground = Brushes.White
+            });
+
+            tb.Inlines.Add(new Run(product.Quantity.ToString())
+            {
+                Foreground = product.Quantity == 0 ? Brushes.Red : Brushes.LightGreen,
+                FontWeight = FontWeights.SemiBold
+            });
+
+            if (product.Quantity == 0)
+            {
+                tb.Foreground = Brushes.Red;
+            }
+            else
+            {
+                tb.Foreground = Brushes.LightGreen;
+            }
+        }
+
         private void AddProductClick(object sender, RoutedEventArgs e)
         {
-            try
+            // reset errors + borders
+            AddNameError.Text = "";
+            AddPriceError.Text = "";
+            AddQuantityError.Text = "";
+            AddImageError.Text = "";
+
+            AddNameBox.BorderBrush = Brushes.Gray;
+            AddPriceBox.BorderBrush = Brushes.Gray;
+            AddQuantityBox.BorderBrush = Brushes.Gray;
+            AddImageBox.BorderBrush = Brushes.Gray;
+
+            bool hasError = false;
+
+            // Name
+            if (string.IsNullOrWhiteSpace(AddNameBox.Text))
             {
-                var newProduct = new Product
-                {
-                    ProductName = AddNameBox.Text,
-                    Price = decimal.Parse(AddPriceBox.Text),
-                    Quantity = int.Parse(AddQuantityBox.Text),
-                    ImgPath = AddImageBox.Text,
-                    Tags = AddTagsBox.Text,
-                    CreatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
-                };
-
-                bool success = productService.AddProduct(newProduct);
-
-                if (success)
-                {
-                    Products.Add(newProduct); // instant UI update
-                    AddOverlay.Visibility = Visibility.Collapsed;
-
-                    ClearAddFields();
-                }
-                else
-                {
-                    MessageBox.Show("Failed to add product");
-                }
+                AddNameError.Text = "Name is required";
+                AddNameBox.BorderBrush = Brushes.Red;
+                hasError = true;
             }
-            catch
+
+            // Price
+            if (!decimal.TryParse(AddPriceBox.Text, out decimal price) || price <= 0)
             {
-                MessageBox.Show("Invalid input!");
+                AddPriceError.Text = "Valid price required";
+                AddPriceBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            // Quantity
+            if (!int.TryParse(AddQuantityBox.Text, out int qty) || qty < 0)
+            {
+                AddQuantityError.Text = "Valid quantity required";
+                AddQuantityBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            // Image
+            if (string.IsNullOrWhiteSpace(AddImageBox.Text))
+            {
+                AddImageError.Text = "Product image is required";
+                AddImageBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+            else if (!System.IO.File.Exists(AddImageBox.Text))
+            {
+                AddImageError.Text = "Image file not found";
+                AddImageBox.BorderBrush = Brushes.Red;
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            var newProduct = new Product
+            {
+                ProductName = AddNameBox.Text,
+                Price = price,
+                Quantity = qty,
+                ImgPath = AddImageBox.Text,
+                Tags = AddTagsBox.Text,
+                CreatedAt = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
+            };
+
+            bool success = productService.AddProduct(newProduct);
+
+            if (success)
+            {
+                Products.Add(newProduct);
+                AddOverlay.Visibility = Visibility.Collapsed;
+                ClearAddFields();
+
+                ShowSuccess("Product added successfully!");
+            }
+            else
+            {
+                ShowError("Failed to add product");
             }
         }
     }

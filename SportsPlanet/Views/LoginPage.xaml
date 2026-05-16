@@ -46,12 +46,18 @@
                      BorderThickness="1"
                          Name="T1"/>
 
+                <TextBlock x:Name="EmailError"
+                           Text=""
+                           Foreground="#EF4444"
+                           FontSize="11"
+                           Margin="5,3,0,0"/>
+
                 <!-- Password -->
                 <TextBlock Text="Password"
                        Foreground="{StaticResource MutedText}"
                        Margin="0,15,0,5"/>
 
-                <TextBox 
+                <PasswordBox
                         Height="35"
                         Background="{StaticResource PrimaryBg}"
                         Foreground="{StaticResource PrimaryText}"
@@ -60,12 +66,19 @@
                         BorderThickness="1"
                         Name="T2"/>
 
+                <TextBlock x:Name="PasswordError"
+                           Text=""
+                           Foreground="#EF4444"
+                           FontSize="11"
+                           Margin="5,3,0,0"/>
+
+                
+
                 <!-- Login Button -->
                 <Button Content="Login"
                     Height="40"
                     Margin="0,20,0,0"
-                    Background="{StaticResource PrimaryBlue}"
-                    Foreground="{StaticResource PrimaryText}"
+                    Style="{StaticResource PrimaryButtonStyle}"
                     BorderThickness="0"
                     FontWeight="SemiBold"
                     Cursor="Hand"

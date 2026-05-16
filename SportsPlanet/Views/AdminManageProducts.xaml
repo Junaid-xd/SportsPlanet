@@ -1,20 +1,37 @@
 ﻿    
-<Page x:Class="SportsPlanet.Views.AdminManageProducts"
+<!--<Page x:Class="SportsPlanet.Views.AdminManageProducts"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:components="clr-namespace:SportsPlanet.Components"
       Title="AdminManageProducts">
 
+    
+
     <Grid Background="{StaticResource PrimaryBg}">
 
-        <!-- ================= MAIN ================= -->
+        <Border x:Name="Toast"
+                Background="#111827"
+                CornerRadius="6"
+                Padding="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,20,0,0"
+                Visibility="Collapsed"
+                Panel.ZIndex="9999">
+
+            <TextBlock x:Name="ToastText"
+                       Foreground="White"
+                       FontWeight="SemiBold"/>
+        </Border>
+
+        --><!-- ================= MAIN ================= --><!--
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <!-- HEADER -->
+            --><!-- HEADER --><!--
             <components:Header x:Name="HeaderControl"/>
 
             <StackPanel Grid.Row="1" Margin="10">
@@ -24,14 +41,12 @@
                             Content="+ Add Product"
                             Width="150"
                             Height="35"
-                            Background="{StaticResource PrimaryBlue}"
-                            Foreground="{StaticResource OnPrimaryText}"
-                            BorderThickness="0"
+                            Style="{StaticResource PrimaryButtonStyle}"
                             HorizontalAlignment="Right"
                             Margin="0 0 10 10"
                             Click="OpenAddProductPopup"/>
 
-                <!-- PRODUCTS LIST -->
+                --><!-- PRODUCTS LIST --><!--
                 <ScrollViewer Grid.Row="1">
                     <ItemsControl Name="ProductsItemsControl">
                         <ItemsControl.ItemsPanel>
@@ -43,12 +58,12 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border Width="200"
-                          Margin="10"
-                          Padding="10"
-                          Background="{StaticResource CardBg}"
-                          BorderBrush="#99FFFFFF"
-                          BorderThickness="1"
-                          CornerRadius="5">
+                                          Margin="10"
+                                          Padding="10"
+                                          Background="{StaticResource CardBg}"
+                                          BorderBrush="#99FFFFFF"
+                                          BorderThickness="1"
+                                          CornerRadius="5">
 
                                     <StackPanel>
 
@@ -62,22 +77,23 @@
                                      Margin="0,10,0,0"/>
 
                                         <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}"
-                                     Foreground="{StaticResource SecondaryText}"/>
+                                     Foreground="{StaticResource PrimaryText}"/>
 
-                                        <TextBlock Text="{Binding Quantity}"
-                                     Foreground="LightGreen"/>
+                                        
+                                        <TextBlock x:Name="QtyText"
+                                                   Loaded="QtyText_Loaded"/>
 
-                                        <!-- EDIT BUTTON -->
+                                        --><!-- EDIT BUTTON --><!--
                                         <Button Content="Edit"
-                                  Margin="0,10,0,0"
-                                  Background="{StaticResource PrimaryBlue}"
-                                  Foreground="{StaticResource OnPrimaryText}"
-                                  BorderThickness="0"
-                                  Tag="{Binding}"
-                                  Click="EditProductClick"/>
+                                                Margin="0,20,0,0"
+                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                BorderThickness="0"
+                                                Tag="{Binding}"
+                                                Click="EditProductClick"/>
                                     </StackPanel>
 
                                 </Border>
+
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -88,7 +104,7 @@
           
         </Grid>
 
-        <!-- ================= EDIT POPUP ================= -->
+        --><!-- ================= EDIT POPUP ================= --><!--
         <Grid x:Name="EditOverlay"
               Background="{StaticResource OverlayBg}"
               Visibility="Collapsed"
@@ -98,6 +114,8 @@
                     Padding="20"
                     Background="{StaticResource CardBg}"
                     CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="White"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 
@@ -109,26 +127,60 @@
                                Foreground="{StaticResource PrimaryText}"
                                HorizontalAlignment="Center"/>
 
-                    <!-- NAME -->
+                    --><!-- NAME --><!--
                     <TextBlock Text="Name" Margin="0,15,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
-                    <TextBox x:Name="NameBox"/>
+                               Foreground="{StaticResource PrimaryText}"
+                               />
+                    <TextBox x:Name="NameBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
 
-                    <!-- PRICE -->
+                    <TextBlock x:Name="EditNameError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    --><!-- PRICE --><!--
                     <TextBlock Text="Price" Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
-                    <TextBox x:Name="PriceBox"/>
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="PriceBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
+                    
+                    <TextBlock x:Name="EditPriceError"
+                                Foreground="#EF4444"
+                                FontSize="11"
+                                Margin="5,2,0,0"/>
 
-                    <!-- QUANTITY -->
+                    --><!-- QUANTITY --><!--
                     <TextBlock Text="Quantity" Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
-                    <TextBox x:Name="QuantityBox"/>
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="QuantityBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
 
-                    <!-- IMAGE -->
+                    <TextBlock x:Name="EditQuantityError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    --><!-- IMAGE --><!--
                     <StackPanel>
                         <TextBlock Text="Image"
                                    Margin="0,10,0,5"
-                                   Foreground="{StaticResource SecondaryText}"/>
+                                   Foreground="{StaticResource PrimaryText}"/>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -138,42 +190,56 @@
 
                             <TextBox x:Name="ImageBox"
                                      Grid.Column="0"
-                                     Margin="0,0,10,0"/>
+                                     Margin="0,0,10,0"
+                                     Height="35"
+                                     Background="{StaticResource PrimaryBg}"
+                                     Foreground="{StaticResource PrimaryText}"
+                                     BorderBrush="#334155"
+                                     Padding="8"
+                                     BorderThickness="1"/>
 
                             <Button Content="Browse"
                                     Grid.Column="1"
-                                    Background="{StaticResource PrimaryBlue}"
-                                    Foreground="White"
-                                    Padding="8,4"
+                                    Style="{StaticResource PrimaryButtonStyle}"
                                     Click="BrowseImageClick"/>
                         </Grid>
+
+                        <TextBlock x:Name="EditImageError"
+                                   Foreground="#EF4444"
+                                   FontSize="11"
+                                   Margin="5,2,0,0"/>
                     </StackPanel>
 
-                    <!-- TAGS -->
+                    --><!-- TAGS --><!--
                     <TextBlock Text="Tags" Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
-                    <TextBox x:Name="TagsBox"/>
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="TagsBox"
+                             Height="35"
+                            Background="{StaticResource PrimaryBg}"
+                            Foreground="{StaticResource PrimaryText}"
+                            BorderBrush="#334155"
+                            Padding="8"
+                            BorderThickness="1"/>
 
-                    <!-- BUTTONS -->
+                    --><!-- BUTTONS --><!--
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Right"
                                 Margin="0,20,0,0">
 
                         <Button Content="Delete"
-                                Background="{StaticResource Danger}"
+                                Style="{StaticResource DangerButtonStyle}"
                                 Foreground="White"
                                 Margin="0,0,10,0"
                                 Click="DeleteProductClick"/>
 
                         <Button Content="Update"
-                                Background="{StaticResource PrimaryBlue}"
+                                Style="{StaticResource PrimaryButtonStyle}"
                                 Foreground="White"
                                 Margin="0,0,10,0"
                                 Click="UpdateProductClick"/>
 
                         <Button Content="Close"
-                                Background="Transparent"
-                                Foreground="{StaticResource SecondaryText}"
+                                Style="{StaticResource SecondaryButtonStyle}"
                                 Click="CloseOverlay"/>
                     </StackPanel>
 
@@ -182,7 +248,7 @@
         </Grid>
 
 
-        <!-- ================= ADD POPUP ================= -->
+        --><!-- ================= ADD POPUP ================= --><!--
         <Grid x:Name="AddOverlay"
               Background="{StaticResource OverlayBg}"
               Visibility="Collapsed"
@@ -199,49 +265,463 @@
 
                 <StackPanel>
 
-                    <!-- TITLE -->
+                    --><!-- TITLE --><!--
                     <TextBlock Text="Add Product"
                                FontSize="20"
                                FontWeight="Bold"
                                Foreground="{StaticResource PrimaryText}"
                                HorizontalAlignment="Center"/>
 
-                    <!-- NAME -->
+                    --><!-- NAME --><!--
                     <TextBlock Text="Product Name"
                                Margin="0,15,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
+                               Foreground="{StaticResource PrimaryText}"/>
                     <TextBox x:Name="AddNameBox"
                              Height="35"
                              Padding="8"
                              Background="{StaticResource PrimaryBg}"
                              Foreground="{StaticResource PrimaryText}"
                              BorderBrush="#334155"/>
+                    <TextBlock x:Name="AddNameError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
 
-                    <!-- PRICE -->
+                    --><!-- PRICE --><!--
                     <TextBlock Text="Price (Rs.)"
                                Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
+                               Foreground="{StaticResource PrimaryText}"/>
                     <TextBox x:Name="AddPriceBox"
                             Height="35"
                             Padding="8"
                             Background="{StaticResource PrimaryBg}"
                             Foreground="{StaticResource PrimaryText}"/>
+                    <TextBlock x:Name="AddPriceError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
 
-                    <!-- QUANTITY -->
+                    --><!-- QUANTITY --><!--
                     <TextBlock Text="Quantity"
                                Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
+                               Foreground="{StaticResource PrimaryText}"/>
                     
                     <TextBox x:Name="AddQuantityBox"
                              Height="35"
                              Padding="8"
                              Background="{StaticResource PrimaryBg}"
                              Foreground="{StaticResource PrimaryText}"/>
+                    <TextBlock x:Name="AddQuantityError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
 
-                    <!-- IMAGE -->
+                    --><!-- IMAGE --><!--
                     <TextBlock Text="Product Image"
                                Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
+                               Foreground="{StaticResource PrimaryText}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="AddImageBox"
+                                 Height="35"
+                                 Padding="8"
+                                 Background="{StaticResource PrimaryBg}"
+                                 Foreground="{StaticResource PrimaryText}"
+                                 Margin="0,0,10,0"/>
+
+                       
+
+                        <Button Content="Browse"
+                                Grid.Column="1"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Padding="10,5"
+                                Click="BrowseAddImageClick"/>
+                    </Grid>
+                    
+                    <TextBlock x:Name="AddImageError"
+                                Foreground="#EF4444"
+                                FontSize="11"
+                                Margin="5,2,0,0"/>
+
+                    --><!-- TAGS --><!--
+                    <TextBlock Text="Tags (comma separated)"
+                               Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="AddTagsBox"
+                             Height="35"
+                             Padding="8"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"/>
+
+                    --><!-- BUTTONS --><!--
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,20,0,0">
+
+                        <Button Content="Cancel"
+                                Width="100"
+                                Margin="0 0 10 0"
+                                Height="35"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Click="CloseAddPopup"/>
+
+                        <Button Content="Add Product"
+                                        Width="120"
+                                        Height="35"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        BorderThickness="0"
+                                        Click="AddProductClick"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<Page x:Class="SportsPlanet.Views.AdminManageProducts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:components="clr-namespace:SportsPlanet.Components"
+      Title="AdminManageProducts">
+
+    <Grid Background="{StaticResource PrimaryBg}">
+
+        <!-- TOAST -->
+        <Border x:Name="Toast"
+                Background="#111827"
+                CornerRadius="6"
+                Padding="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,20,0,0"
+                Visibility="Collapsed"
+                Panel.ZIndex="9999">
+
+            <TextBlock x:Name="ToastText"
+                       Foreground="White"
+                       FontWeight="SemiBold"/>
+        </Border>
+
+        <!-- MAIN LAYOUT -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- HEADER -->
+            <components:Header x:Name="HeaderControl"/>
+
+            <!-- CONTENT AREA (FIXED SCROLL) -->
+            <Grid Grid.Row="1" Margin="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- ADD BUTTON -->
+                <Button Grid.Row="0"
+                        Content="+ Add Product"
+                        Width="150"
+                        Height="35"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 10"
+                        Click="OpenAddProductPopup"/>
+
+                <!-- SCROLLABLE PRODUCT LIST -->
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto">
+
+                    <ItemsControl Name="ProductsItemsControl">
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Width="200"
+                                        Margin="10"
+                                        Padding="10"
+                                        Background="{StaticResource CardBg}"
+                                        BorderBrush="#99FFFFFF"
+                                        BorderThickness="1"
+                                        CornerRadius="5">
+
+                                    <StackPanel>
+
+                                        <Image Height="120"
+                                               Stretch="UniformToFill"
+                                               Source="{Binding ImgPath, IsAsync=True}"/>
+
+                                        <TextBlock Text="{Binding ProductName}"
+                                                   Foreground="{StaticResource PrimaryText}"
+                                                   FontWeight="Bold"
+                                                   Margin="0,10,0,0"/>
+
+                                        <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}"
+                                                   Foreground="{StaticResource PrimaryText}"/>
+
+                                        <TextBlock x:Name="QtyText"
+                                                   Loaded="QtyText_Loaded"/>
+
+                                        <Button Content="Edit"
+                                                Margin="0,20,0,0"
+                                                Style="{StaticResource PrimaryButtonStyle}"
+                                                BorderThickness="0"
+                                                Tag="{Binding}"
+                                                Click="EditProductClick"/>
+
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+
+        <!-- EDIT POPUP (UNCHANGED) -->
+        <Grid x:Name="EditOverlay"
+              Background="{StaticResource OverlayBg}"
+              Visibility="Collapsed"
+              Panel.ZIndex="999">
+
+            <Border Width="500"
+                    Padding="20"
+                    Background="{StaticResource CardBg}"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="White"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+                <StackPanel>
+
+                    <TextBlock Text="Edit Product"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryText}"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Name" Margin="0,15,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="NameBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
+
+                    <TextBlock x:Name="EditNameError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Price" Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="PriceBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
+
+                    <TextBlock x:Name="EditPriceError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Quantity" Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="QuantityBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
+
+                    <TextBlock x:Name="EditQuantityError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Image"
+                               Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="ImageBox"
+                                 Grid.Column="0"
+                                 Margin="0,0,10,0"
+                                 Height="35"
+                                 Background="{StaticResource PrimaryBg}"
+                                 Foreground="{StaticResource PrimaryText}"
+                                 BorderBrush="#334155"
+                                 Padding="8"
+                                 BorderThickness="1"/>
+
+                        <Button Content="Browse"
+                                Grid.Column="1"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Click="BrowseImageClick"/>
+                    </Grid>
+
+                    <TextBlock x:Name="EditImageError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Tags" Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="TagsBox"
+                             Height="35"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"
+                             Padding="8"
+                             BorderThickness="1"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="0,20,0,0">
+
+                        <Button Content="Delete"
+                                Style="{StaticResource DangerButtonStyle}"
+                                Foreground="White"
+                                Margin="0,0,10,0"
+                                Click="DeleteProductClick"/>
+
+                        <Button Content="Update"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Foreground="White"
+                                Margin="0,0,10,0"
+                                Click="UpdateProductClick"/>
+
+                        <Button Content="Close"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Click="CloseOverlay"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ADD POPUP (UNCHANGED) -->
+        <Grid x:Name="AddOverlay"
+              Background="{StaticResource OverlayBg}"
+              Visibility="Collapsed"
+              Panel.ZIndex="999">
+
+            <Border Width="500"
+                    Padding="20"
+                    Background="{StaticResource CardBg}"
+                    CornerRadius="5"
+                    HorizontalAlignment="Center"
+                    BorderBrush="#FFFFFF"
+                    BorderThickness="2"
+                    VerticalAlignment="Center">
+
+                <StackPanel>
+
+                    <TextBlock Text="Add Product"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="{StaticResource PrimaryText}"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Product Name"
+                               Margin="0,15,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="AddNameBox"
+                             Height="35"
+                             Padding="8"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"
+                             BorderBrush="#334155"/>
+                    <TextBlock x:Name="AddNameError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Price (Rs.)"
+                               Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="AddPriceBox"
+                             Height="35"
+                             Padding="8"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"/>
+                    <TextBlock x:Name="AddPriceError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Quantity"
+                               Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
+                    <TextBox x:Name="AddQuantityBox"
+                             Height="35"
+                             Padding="8"
+                             Background="{StaticResource PrimaryBg}"
+                             Foreground="{StaticResource PrimaryText}"/>
+                    <TextBlock x:Name="AddQuantityError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
+                    <TextBlock Text="Product Image"
+                               Margin="0,10,0,5"
+                               Foreground="{StaticResource PrimaryText}"/>
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -258,47 +738,47 @@
 
                         <Button Content="Browse"
                                 Grid.Column="1"
-                                Background="{StaticResource PrimaryBlue}"
-                                Foreground="White"
+                                Style="{StaticResource PrimaryButtonStyle}"
                                 Padding="10,5"
                                 Click="BrowseAddImageClick"/>
                     </Grid>
 
-                    <!-- TAGS -->
+                    <TextBlock x:Name="AddImageError"
+                               Foreground="#EF4444"
+                               FontSize="11"
+                               Margin="5,2,0,0"/>
+
                     <TextBlock Text="Tags (comma separated)"
                                Margin="0,10,0,5"
-                               Foreground="{StaticResource SecondaryText}"/>
+                               Foreground="{StaticResource PrimaryText}"/>
                     <TextBox x:Name="AddTagsBox"
                              Height="35"
                              Padding="8"
                              Background="{StaticResource PrimaryBg}"
                              Foreground="{StaticResource PrimaryText}"/>
 
-                    <!-- BUTTONS -->
                     <StackPanel Orientation="Horizontal"
-                HorizontalAlignment="Right"
-                Margin="0,20,0,0">
+                                HorizontalAlignment="Right"
+                                Margin="0,20,0,0">
 
                         <Button Content="Cancel"
-                Width="90"
-                Height="35"
-                Margin="0,0,10,0"
-                Background="Transparent"
-                Foreground="{StaticResource SecondaryText}"
-                BorderBrush="#334155"
-                Click="CloseAddPopup"/>
+                                Width="100"
+                                Margin="0 0 10 0"
+                                Height="35"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Click="CloseAddPopup"/>
 
                         <Button Content="Add Product"
-                                        Width="120"
-                                        Height="35"
-                                        Background="{StaticResource PrimaryBlue}"
-                                        Foreground="{StaticResource OnPrimaryText}"
-                                        BorderThickness="0"
-                                        Click="AddProductClick"/>
+                                Width="120"
+                                Height="35"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                BorderThickness="0"
+                                Click="AddProductClick"/>
                     </StackPanel>
 
                 </StackPanel>
             </Border>
         </Grid>
+
     </Grid>
 </Page>

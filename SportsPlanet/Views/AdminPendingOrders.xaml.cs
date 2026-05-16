@@ -2,8 +2,10 @@
 using SportsPlanet.Models;
 using SportsPlanet.Services;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SportsPlanet.Views
 {
@@ -46,11 +48,10 @@ namespace SportsPlanet.Views
             var order = (sender as Button)?.Tag as Order;
             if (order == null) return;
 
-            DetailsInfoText.Text =
-                $"Customer: {order.User.Email}\n" +
-                $"Address: {order.Address}\n" +
-                $"Delivery: {order.DeliveryType}\n" +
-                $"Total: Rs. {order.TotalAmount}";
+            CustomerText.Text = order.User.Email;
+            AddressText.Text = order.Address;
+            DeliveryText.Text = order.DeliveryType;
+            TotalText.Text = $"{order.TotalAmount} Rs";
 
             DetailsItemsControl.ItemsSource = order.OrderItems;
 
@@ -72,13 +73,28 @@ namespace SportsPlanet.Views
 
             if (success)
             {
-                Orders.Remove(order); // instant UI update
-                MessageBox.Show("Order dispatched!");
+                Orders.Remove(order);
+                ShowToast("Order dispatched successfully!");
             }
             else
             {
-                MessageBox.Show("Failed to dispatch order!");
+                ShowToast("Failed to dispatch order!", false);
             }
+        }
+
+        private async void ShowToast(string message, bool isSuccess = true)
+        {
+            ToastText.Text = message;
+
+            Toast.Background = isSuccess
+                ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#16A34A"))
+                : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#DC2626"));
+
+            Toast.Visibility = Visibility.Visible;
+
+            await Task.Delay(2500);
+
+            Toast.Visibility = Visibility.Collapsed;
         }
     }
 }

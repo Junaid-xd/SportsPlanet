@@ -57,11 +57,17 @@
                                Foreground="{StaticResource MutedText}"
                                Margin="0,5"/>
 
+
                         <TextBox Name="T1" Height="35"
                              Background="{StaticResource CardBg}"
                              Foreground="{StaticResource PrimaryText}"
                              BorderBrush="#334155"
                              Padding="8"/>
+
+                        <TextBlock x:Name="NameError"
+                                   Foreground="#EF4444"
+                                   FontSize="11"
+                                   Margin="5,2,0,0"/>
 
                         <!-- Email -->
                         <TextBlock Text="Email"
@@ -74,6 +80,12 @@
                              BorderBrush="#334155"
                              Padding="8"/>
 
+                        <TextBlock x:Name="EmailError"
+           Foreground="#EF4444"
+           FontSize="11"
+           Margin="5,2,0,0"/>
+                        
+
                         <!-- Password -->
                         <TextBlock Text="Password"
                                Foreground="{StaticResource MutedText}"
@@ -85,6 +97,11 @@
                              BorderBrush="#334155"
                              Padding="8"/>
 
+                        <TextBlock x:Name="PasswordError"
+           Foreground="#EF4444"
+           FontSize="11"
+           Margin="5,2,0,0"/>
+
                         <!-- Confirm Password -->
                         <TextBlock Text="Confirm Password"
                                Foreground="{StaticResource MutedText}"
@@ -95,6 +112,11 @@
                              Foreground="{StaticResource PrimaryText}"
                              BorderBrush="#334155"
                              Padding="8"/>
+
+                        <TextBlock x:Name="ConfirmPasswordError"
+           Foreground="#EF4444"
+           FontSize="11"
+           Margin="5,2,0,0"/>
 
                         <!-- Role -->
                         <TextBlock Text="Select Role"
@@ -110,6 +132,11 @@
                             <ComboBoxItem Content="ADMIN"/>
                             <ComboBoxItem Content="SUPER_ADMIN"/>
                         </ComboBox>
+
+                        <TextBlock x:Name="RoleError"
+           Foreground="#EF4444"
+           FontSize="11"
+           Margin="5,2,0,0"/>
 
                         <!-- Button -->
                         <Button Content="Create Admin"
@@ -127,6 +154,22 @@
 
             </Border>
         </Grid>
+
+
+        <Border x:Name="Toast"
+                Background="#111827"
+                CornerRadius="6"
+                Padding="12"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,20,0,0"
+                Visibility="Collapsed"
+                Panel.ZIndex="9999">
+
+            <TextBlock x:Name="ToastText"
+               Foreground="White"
+               FontWeight="SemiBold"/>
+        </Border>
 
     </Grid>
     

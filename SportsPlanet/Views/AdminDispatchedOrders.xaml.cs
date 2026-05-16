@@ -1,47 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Windows;
-//using System.Windows.Controls;
-//using System.Windows.Data;
-//using System.Windows.Documents;
-//using System.Windows.Input;
-//using System.Windows.Media;
-//using System.Windows.Media.Imaging;
-//using System.Windows.Navigation;
-//using System.Windows.Shapes;
-
-//namespace SportsPlanet.Views
-//{
-//    /// <summary>
-//    /// Interaction logic for AdminDispatchedOrders.xaml
-//    /// </summary>
-//    public partial class AdminDispatchedOrders : Page
-//    {
-//        private Frame frame;
-//        public AdminDispatchedOrders(Frame fra)
-//        {
-//            InitializeComponent();
-//            frame = fra;
-
-//            HeaderControl.SetFrame(frame);
-//            HeaderControl.SetActive("Dispatched Orders");
-//        }
-//    }
-//}
-
-
-
-
-
-
-
-
-
-
-
+﻿
 using SportsPlanet.Models;
 using SportsPlanet.Services;
 using System;
@@ -140,11 +97,10 @@ namespace SportsPlanet.Views
             var order = (sender as Button)?.Tag as Order;
             if (order == null) return;
 
-            DetailsInfoText.Text =
-                $"Customer: {order.User.Email}\n" +
-                $"Address: {order.Address}\n" +
-                $"Delivery: {order.DeliveryType}\n" +
-                $"Total: Rs. {order.TotalAmount}";
+            CustomerText.Text = order.User.Email;
+            AddressText.Text = order.Address;
+            DeliveryText.Text = order.DeliveryType;
+            TotalText.Text = $"{order.TotalAmount} Rs";
 
             DetailsItemsControl.ItemsSource = order.OrderItems;
 

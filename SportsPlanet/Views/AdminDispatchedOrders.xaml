@@ -132,10 +132,7 @@
                                         <!-- ACTION -->
                                         <Button Content="View"
                                                 HorizontalAlignment="Right"
-                                                Padding="10,5"
-                                                Background="{StaticResource HoverBg}"
-                                                Foreground="{StaticResource PrimaryText}"
-                                                BorderThickness="0"
+                                                Style="{StaticResource SecondaryButtonStyle}"
                                                 Tag="{Binding}"
                                                 Click="ViewDetailsClick"/>
 
@@ -163,6 +160,8 @@
                     Padding="20"
                     Background="{StaticResource CardBg}"
                     CornerRadius="10"
+                    BorderThickness="1"
+                    BorderBrush="White"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 
@@ -174,32 +173,144 @@
                                HorizontalAlignment="Center"
                                Foreground="{StaticResource PrimaryText}"/>
 
-                    <TextBlock x:Name="DetailsInfoText"
-                               Margin="0,10"
-                               Foreground="{StaticResource PrimaryText}"/>
+                   
 
-                    <ScrollViewer MaxHeight="200">
-                        <ItemsControl x:Name="DetailsItemsControl">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition Width="80"/>
-                                        </Grid.ColumnDefinitions>
 
-                                        <TextBlock Text="{Binding Product.ProductName}" Foreground="{StaticResource PrimaryText}"/>
-                                        <TextBlock Text="{Binding Quantity}" Grid.Column="1" Foreground="{StaticResource PrimaryText}"/>
-                                        <TextBlock Text="{Binding Price, StringFormat=Rs. {0}}" Grid.Column="2" Foreground="{StaticResource PrimaryText}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                    <Border Background="{StaticResource HoverBg}"
+                            CornerRadius="8"
+                            Padding="10"
+                            Margin="0,10,0,10">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Customer -->
+                            <TextBlock Text="Customer:"
+                                        Foreground="{StaticResource SecondaryText}"
+                                        FontWeight="SemiBold"/>
+                            <TextBlock x:Name="CustomerText"
+                                       Grid.Column="1"
+                                       Foreground="{StaticResource PrimaryText}"/>
+
+                            <!-- Address -->
+                            <TextBlock Text="Address:"
+                                       Grid.Row="1"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       FontWeight="SemiBold"
+                                       Margin="0,6,0,0"/>
+                            <TextBlock x:Name="AddressText"
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       Margin="0,6,0,0"
+                                       TextWrapping="Wrap"/>
+
+                            <!-- Delivery -->
+                            <TextBlock Text="Delivery:"
+                                       Grid.Row="2"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       FontWeight="SemiBold"
+                                       Margin="0,6,0,0"/>
+                            <TextBlock x:Name="DeliveryText"
+                                       Grid.Row="2"
+                                       Grid.Column="1"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       Margin="0,6,0,0"/>
+
+                            <!-- Total -->
+                            <TextBlock Text="Total:"
+                                       Grid.Row="3"
+                                       Foreground="{StaticResource SecondaryText}"
+                                       FontWeight="SemiBold"
+                                       Margin="0,6,0,0"/>
+                            <TextBlock x:Name="TotalText"
+                                       Grid.Row="3"
+                                       Grid.Column="1"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       FontWeight="Bold"
+                                       Margin="0,6,0,0"/>
+                        </Grid>
+
+                    </Border>
+
+
+                    <Border Background="{StaticResource CardBg}"
+                            CornerRadius="8"
+                            Padding="8">
+
+                        <ScrollViewer MaxHeight="200"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Disabled">
+
+                            <ItemsControl x:Name="DetailsItemsControl">
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <Border Background="{StaticResource HoverBg}"
+                            CornerRadius="6"
+                            Padding="8"
+                            Margin="0,4">
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="90"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- PRODUCT NAME -->
+                                                <TextBlock Text="{Binding Product.ProductName}"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       VerticalAlignment="Center"
+                                       FontSize="13"/>
+
+                                                <!-- QUANTITY -->
+                                                <Border Grid.Column="1"
+                                    Background="{StaticResource InputBg}"
+                                    CornerRadius="5"
+                                    Padding="4"
+                                    HorizontalAlignment="Center">
+
+                                                    <TextBlock Text="{Binding Quantity}"
+                                           Foreground="{StaticResource PrimaryText}"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"/>
+                                                </Border>
+
+                                                <!-- PRICE -->
+                                                <TextBlock Grid.Column="2"
+                                       Text="{Binding Price, StringFormat=Rs. {0}}"
+                                       Foreground="{StaticResource PrimaryText}"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"/>
+
+                                            </Grid>
+
+                                        </Border>
+
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+
+                            </ItemsControl>
+
+                        </ScrollViewer>
+
+                    </Border>
 
                     <Button Content="Close"
-                            Margin="0,10,0,0"
+                           Style="{StaticResource PrimaryButtonStyle}"
                             HorizontalAlignment="Right"
                             Click="CloseDetails"/>
 
