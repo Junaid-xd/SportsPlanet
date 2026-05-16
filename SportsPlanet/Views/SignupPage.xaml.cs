@@ -24,51 +24,6 @@ namespace SportsPlanet.Views
             authService = new AuthService();
         }
 
-        //private void SignupButtonClick(object sender, RoutedEventArgs e)
-        //{
-        //    string name = T1.Text.Trim();
-        //    string email = T2.Text.Trim();
-        //    string password = T3.Text;
-        //    string confirmPassword = T4.Text;
-
-        //    if (string.IsNullOrWhiteSpace(name) ||
-        //        string.IsNullOrWhiteSpace(email) ||
-        //        string.IsNullOrWhiteSpace(password) ||
-        //        string.IsNullOrWhiteSpace(confirmPassword))
-        //    {
-        //        MessageBox.Show("Please fill all fields");
-        //        return;
-        //    }
-
-        //    if (!IsValidEmail(email))
-        //    {
-        //        MessageBox.Show("Invalid email format");
-        //        return;
-        //    }
-
-        //    if (password.Length < 6)
-        //    {
-        //        MessageBox.Show("Password must be at least 6 characters");
-        //        return;
-        //    }
-
-        //    if (password != confirmPassword)
-        //    {
-        //        MessageBox.Show("Passwords don't match");
-        //        return;
-        //    }
-
-        //    if (createNewUserFlow(name, email, password))
-        //    {
-        //        MessageBox.Show("User Created");
-        //        frame.Navigate(new LoginPage(frame));
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Email already exists");
-        //    }
-        //}
-
 
         private void SignupButtonClick(object sender, RoutedEventArgs e)
         {

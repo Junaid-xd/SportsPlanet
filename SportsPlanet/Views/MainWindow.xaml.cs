@@ -19,7 +19,6 @@ namespace SportsPlanet.Views
         public MainWindow()
         {
             InitializeComponent();
-            //MainFrame.Navigate(new LoginPage(MainFrame));
             MainFrame.Navigate(new Dashboard(MainFrame));
         }
     }
