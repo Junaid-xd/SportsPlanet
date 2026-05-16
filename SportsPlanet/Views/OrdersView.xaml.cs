@@ -34,7 +34,7 @@ namespace SportsPlanet.Views
             HeaderControl.SetActive("Orders");
             orderService = new OrderService();
 
-            Loaded += PageLoaded; // same pattern as Dashboard
+            Loaded += PageLoaded; 
         }
 
         private void PageLoaded(object sender, RoutedEventArgs e)
@@ -58,10 +58,6 @@ namespace SportsPlanet.Views
                 OrdersItemsControl.ItemsSource = null;
                 OrdersItemsControl.ItemsSource = orders;
 
-                //if (orders.Count == 0)
-                //{
-                //    MessageBox.Show("No orders found!");
-                //}
             }
             catch (Exception ex)
             {
